@@ -1,0 +1,20 @@
+body{
+  background-color: #455a64;
+}
+
+h3{
+  color: white;
+}
+
+label{
+  text-transform: capitalize;
+}
+
+#login{
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+#btnLogin, #btnRegistro{
+  margin-bottom: 30px;
+}
