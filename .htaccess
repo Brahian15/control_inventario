@@ -1,5 +1,0 @@
-RewriteEngine On
-
-RewriteRule ^registro$            ?c=admin&a=register
-
-RewriteRule ^inicio$              ?c=admin&a=login

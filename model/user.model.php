@@ -68,7 +68,18 @@ class UserModel{
   //                                                                                                            //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  public function ReadEmail($data){
+    try {
+      $sql= "SELECT * FROM usuario WHERE user_email= ?";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array($data[0]));
+      $result= $query->fetch(PDO::FETCH_BOTH);
 
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
 
 }
  ?>

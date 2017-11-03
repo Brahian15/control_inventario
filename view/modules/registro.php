@@ -32,7 +32,7 @@
 
     </form>
 
-    <a id="btnRegistro" href="inicio" class="btn waves-effect waves-light blue-grey darken-2 col s5 offset-s1">Cancelar</a>
+    <a id="btnRegistro" href="index.php" class="btn waves-effect waves-light blue-grey darken-2 col s5 offset-s1">Atras</a>
 
   </div>
 </div>
