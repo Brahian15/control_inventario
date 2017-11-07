@@ -74,30 +74,106 @@
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                            //
-    //                                       "algo que no se que es"                                              //
+    //                                                EQUIPO                                                      //
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public function dashboard(){
-      $titulo= "Principal";
+    //Funcion para ver el formulario de registro de equipos
+
+    public function Equipo(){
+      $titulo= 'Equipo';
       require_once 'view/include/header.php';
-      require_once 'view/modules/admin/principal.php';
+      require_once 'view/modules/admin/equipo.php';
+      require_once 'view/include/footer.php';
+    }
+
+    //Funcion para guardar equipos
+
+    public function CreateEquipo(){
+      $data= $_POST["data"];
+      $result= $this->model->CreateEquipo($data);
+      header("Location: ?c=admin&a=Equipo&msn=$result");
+    }
+
+    public function dashboard(){
+      $titulo= 'Ver equipos';
+      require_once 'view/include/header.php';
+      require_once 'view/modules/admin/readEqui.php';
       require_once 'view/include/footer.php';
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                            //
-    //                                                EQUIPO                                                      //
+    //                                               PANTALLA                                                     //
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public function Equipo(){
-      $titulo= "Equipo";
-      require_once "view/include/header.php";
-      require_once "view/modules/admin/equipo.php";
-      require_once "view/include/footer.php";
+    //Funcion para ver el formulario de registro de pantallas
+
+    public function ReadPantalla(){
+      $titulo= 'Ver pantalla';
+      require_once 'view/include/header.php';
+      require_once 'view/modules/admin/readPantalla.php';
+      require_once 'view/include/footer.php';
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                               TECLADO                                                      //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Funcion para ver el formulario de registro de teclados
+
+    public function ReadTeclado(){
+      $titulo= 'Ver teclado';
+      require_once 'view/include/header.php';
+      require_once 'view/modules/admin/readTeclado.php';
+      require_once 'view/include/footer.php';
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                              HARDPHONE                                                     //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Funcion para ver el formulario de registro de hardphone
+
+    public function ReadHardphone(){
+      $titulo= 'Ver hradphone';
+      require_once 'view/include/header.php';
+      require_once 'view/modules/admin/readHardphone.php';
+      require_once 'view/include/footer.php';
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                             ASIGNACION                                                     //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Funcion para ver el formulario de registro de asignacion
+
+    public function ReadAsignacion(){
+      $titulo= 'Ver asignacion';
+      require_once 'view/include/header.php';
+      require_once 'view/modules/admin/readAsignacion.php';
+      require_once 'view/include/footer.php';
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                            CERRAR SESION                                                   //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Funcion para cerrar sesion
+
+    public function logout(){
+      session_destroy();
+      header("Location: ?c=admin&a=login");
+    }
 
   }
  ?>

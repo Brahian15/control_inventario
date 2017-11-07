@@ -81,5 +81,56 @@ class UserModel{
     return $result;
   }
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //                                                                                                            //
+  //                                               EQUIPOS                                                      //
+  //                                                                                                            //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //Esta funcion nos va a servir para guardar los equipos que esten registrados
+
+  public function CreateEquipo($data){
+    $sql= "SELECT * FROM equipo WHERE equi_serial= '$data[0]' OR equi_type= '$data[1]' OR equi_consecutivo= '$data[2]' OR equi_hostname= '$data[3]'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $ver_equipos= $query->rowCount();
+
+    if($ver_equipos==true){
+      $msn= "Verifica los datos ingresado, ya que hay un dato que ya esta registrado en el sistema.";
+
+      return $msn;
+    }else {
+      try {
+        $sql= "INSERT INTO equipo VALUES('',?,?,?,?,?)";
+        $query= $this->pdo->prepare($sql);
+        $query->execute(array($data[0],$data[1],$data[2],$data[3],"Sin asignacion"));
+        $msn= "El equipo fue guardado exitosamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //                                                                                                            //
+  //                                               EQUIPOS                                                      //
+  //                                                                                                            //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //Funcion para cerrar la sesion del usuario
+
+  public function __DESTRUCT(){
+    try {
+
+      DataBase::disconnet();
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+
+  }
+
 }
  ?>

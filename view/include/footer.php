@@ -9,4 +9,7 @@
     $('select').material_select();
   });
 </script>
+<script type="text/javascript">
+  $(".dropdown-button").dropdown();
+</script>
 </html>
