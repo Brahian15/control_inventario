@@ -19,7 +19,7 @@
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Funcion de la vista del registro
+    //Funcion de carga del formulario de registro de usuarios
 
     public function register(){
       $titulo = 'Registro';
@@ -46,13 +46,17 @@
     //Vista principal del sistema
 
     public function login(){
-      $titulo = 'Inicio de sesion';
-      require_once 'view/include/header.php';
-      require_once 'view/modules/login.php';
-      require_once 'view/include/footer.php';
+      if(isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=dashboard");
+      }else{
+        $titulo = 'Inicio de sesion';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/login.php';
+        require_once 'view/include/footer.php';
+      }
     }
 
-    //Funcion para iniciar sesion
+    //Funcion de inicio de sesion y creacion de variables de sesion
 
     public function UserLogin(){
       $data[0]= $_POST["email"];
@@ -78,28 +82,42 @@
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Funcion para ver el formulario de registro de equipos
+    //Funcion cargar el formulario de registro de los equipos en el sistema
 
     public function Equipo(){
-      $titulo= 'Equipo';
-      require_once 'view/include/header.php';
-      require_once 'view/modules/admin/equipo.php';
-      require_once 'view/include/footer.php';
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Equipo';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/equipo.php';
+        require_once 'view/include/footer.php';
+      }
     }
 
-    //Funcion para guardar equipos
+    //Funcion para guardar equipos en el sistema
 
     public function CreateEquipo(){
-      $data= $_POST["data"];
-      $result= $this->model->CreateEquipo($data);
-      header("Location: ?c=admin&a=Equipo&msn=$result");
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->CreateEquipo($data);
+        header("Location: ?c=admin&a=Equipo&msn=$result");
+      }
     }
 
+    //Funcion de pagina principal y de carga de datos de los equipos registrados en el sistema
+
     public function dashboard(){
-      $titulo= 'Ver equipos';
-      require_once 'view/include/header.php';
-      require_once 'view/modules/admin/readEqui.php';
-      require_once 'view/include/footer.php';
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Ver equipos';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/readEqui.php';
+        require_once 'view/include/footer.php';
+      }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -108,13 +126,42 @@
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Funcion para ver el formulario de registro de pantallas
+    //Funcion para cargar el formulario de registro de pantallas en el sistema
+
+    public function Pantalla(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Pantalla';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/pantalla.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para guardar pantallas en el sistema
+
+    public function CreatePantalla(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->CreatePantalla($data);
+        header("Location: ?c=admin&a=Pantalla&msn=$result");
+      }
+    }
+
+    //Funcion para cargar las pantallas que estan registradas en el sistema
 
     public function ReadPantalla(){
-      $titulo= 'Ver pantalla';
-      require_once 'view/include/header.php';
-      require_once 'view/modules/admin/readPantalla.php';
-      require_once 'view/include/footer.php';
+      if(!isset($_SESSION[""])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Ver pantalla';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/readPantalla.php';
+        require_once 'view/include/footer.php';
+      }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,13 +170,42 @@
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Funcion para ver el formulario de registro de teclados
+    //Funcion para cargar el formulario de registro de teclados en el sistema
+
+    public function Teclado(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Teclado';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/teclado.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para guadar teclados en el Sistema
+
+    public function CreateTeclado(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->CreateTeclado($data);
+        header("Location: ?c=admin&a=Teclado&msn=$result");
+      }
+    }
+
+    //Funcion para ver los teclados que estan registados en el sistema
 
     public function ReadTeclado(){
-      $titulo= 'Ver teclado';
-      require_once 'view/include/header.php';
-      require_once 'view/modules/admin/readTeclado.php';
-      require_once 'view/include/footer.php';
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Ver teclado';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/readTeclado.php';
+        require_once 'view/include/footer.php';
+      }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,11 +216,40 @@
 
     //Funcion para ver el formulario de registro de hardphone
 
+    public function Hardphone(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Hardphone';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/hardphone.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para guardar harphones en el sistema
+
+    public function CreateHardphone(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->CreateHardphone($data);
+        header("Location: ?c=admin&a=Hardphone&msn=$result");
+      }
+    }
+
+    //Funcion para ver los hardphone que estan registrados en el sistema
+
     public function ReadHardphone(){
-      $titulo= 'Ver hradphone';
-      require_once 'view/include/header.php';
-      require_once 'view/modules/admin/readHardphone.php';
-      require_once 'view/include/footer.php';
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Ver hardphone';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/readHardphone.php';
+        require_once 'view/include/footer.php';
+      }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,11 +260,28 @@
 
     //Funcion para ver el formulario de registro de asignacion
 
+    public function Asignacion(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Asignacion';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/asignacion.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para ver las asignaciones que estan registradas en el sistema
+
     public function ReadAsignacion(){
-      $titulo= 'Ver asignacion';
-      require_once 'view/include/header.php';
-      require_once 'view/modules/admin/readAsignacion.php';
-      require_once 'view/include/footer.php';
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= 'Ver asignacion';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/admin/readAsignacion.php';
+        require_once 'view/include/footer.php';
+      }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

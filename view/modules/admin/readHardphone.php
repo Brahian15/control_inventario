@@ -17,10 +17,10 @@
         <ul>
           <li class="active"><a class="dropdown-button" data-activates="dropdown1" href="">Buscar<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a href="?c=admin&a=Equipo">Equipo</a></li>
-          <li><a href="#">Pantalla</a></li>
-          <li><a href="#">Teclado</a></li>
-          <li><a href="#">Hardphone</a></li>
-          <li><a href="#">Asignacion</a></li>
+          <li><a href="?c=admin&a=Pantalla">Pantalla</a></li>
+          <li><a href="?c=admin&a=Teclado">Teclado</a></li>
+          <li><a href="?c=admin&a=Hardphone">Hardphone</a></li>
+          <li><a href="?c=admin&a=Asignacion">Asignacion</a></li>
           <li><a href="?c=admin&a=logout">Cerrar sesion</a></li>
         </ul>
       </div>

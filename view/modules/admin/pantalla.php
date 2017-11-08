@@ -1,5 +1,5 @@
 <div class="row z-depth-4" id="cuerpo">
-  <form action="?c=admin&a=CreateEquipo" method="post">
+  <form action="?c=admin&a=CreatePantalla" method="post">
 
     <nav>
       <ul id="dropdown1" class="dropdown-content">
@@ -16,8 +16,8 @@
       <div class="nav-wrapper green darken-1">
         <ul>
           <li><a class="dropdown-button" data-activates="dropdown1" href="">Buscar<i class="material-icons right">arrow_drop_down</i></a></li>
-          <li class="active"><a href="?c=admin&a=Equipo">Equipo</a></li>
-          <li><a href="?c=admin&a=Pantalla">Pantalla</a></li>
+          <li><a href="?c=admin&a=Equipo">Equipo</a></li>
+          <li class="active"><a href="?c=admin&a=Pantalla">Pantalla</a></li>
           <li><a href="?c=admin&a=Teclado">Teclado</a></li>
           <li><a href="?c=admin&a=Hardphone">Hardphone</a></li>
           <li><a href="?c=admin&a=Asignacion">Asignacion</a></li>
@@ -26,7 +26,7 @@
       </div>
     </nav>
 
-    <h3>Registro de equipos</h3>
+    <h3>Registro de pantallas</h3>
 
     <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" class="validate" required autofocus>
@@ -35,17 +35,12 @@
 
     <div class="input-field col s4">
       <input type="text" name="data[]" class="validate" required>
-      <label>type</label>
+      <label>Type</label>
     </div>
 
-    <div class="input-field col s4 offset-s2">
+    <div class="input-field col s8 offset-s2">
       <input type="text" name="data[]" class="validate" required>
       <label>Consecutivo del inventario</label>
-    </div>
-
-    <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Hostname</label>
     </div>
 
     <button id="btnGuardar" type="submit" class="btn waves-effect waves-light col s4 offset-s2 green darken-1">Guardar</button>

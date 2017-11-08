@@ -12,4 +12,7 @@
 <script type="text/javascript">
   $(".dropdown-button").dropdown();
 </script>
+<script type="text/javascript">
+  $('#textarea1').trigger('autoresize');
+</script>
 </html>
