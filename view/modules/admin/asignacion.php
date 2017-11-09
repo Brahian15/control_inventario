@@ -1,5 +1,5 @@
 <div class="row z-depth-4" id="cuerpo">
-  <form class="" action="index.html" method="post">
+  <form action="?c=admin&a=CreateAsignacion" method="post">
 
     <nav>
       <ul id="dropdown1" class="dropdown-content">
@@ -48,10 +48,10 @@
       <label>Extensión</label>
     </div>
 
-    <div class="input-field col s8 offset-s2">
+    <!-- <div class="input-field col s8 offset-s2">
       <input type="text" name="data[]" class="validate" required>
       <label>Hostname</label>
-    </div>
+    </div> -->
 
     <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" class="validate" required>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data" class="validate" required>
+      <input type="text" name="data[]" class="validate" required>
       <label>Amadeus ARD: CID</label>
     </div>
 

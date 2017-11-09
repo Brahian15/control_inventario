@@ -271,6 +271,18 @@
       }
     }
 
+    //Funcion para guardar asignaciones en el sistema
+
+    public function CreateAsignacion(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->CreateAsignacion($data);
+        header("Location: ?c=admin&a=Asignacion&msn=$result");
+      }
+    }
+
     //Funcion para ver las asignaciones que estan registradas en el sistema
 
     public function ReadAsignacion(){
