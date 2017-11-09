@@ -115,6 +115,36 @@ class UserModel{
     }
   }
 
+  //Funcion para buscar un equipo determinado en la base de datos
+
+  public function SearchEquipo($data){
+    try {
+      $sql= "SELECT * FROM equipo WHERE equi_serial LIKE ? OR equi_type LIKE ? OR equi_consecutivo LIKE ? OR equi_hostname LIKE ? OR equi_estado LIKE ?";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%"));
+      $data= $query->fetchAll(PDO::FETCH_BOTH);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $data;
+  }
+
+  //Funcion para buscar todos los de los equipos que esten registrados en la base de datos
+
+  public function ReadEquipo(){
+    try {
+      $sql= "SELECT * FROM equipo";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                                                                            //
   //                                              PANTALLA                                                      //
@@ -146,6 +176,36 @@ class UserModel{
       return $msn;
 
     }
+  }
+
+  //Funcion para buscar un equipo determinado en la base de datos
+
+  public function SearchPantalla($data){
+    try {
+      $sql= "SELECT * FROM pantalla WHERE pant_serial LIKE ? OR pant_type LIKE ? OR pant_consecutivo LIKE ? OR pant_estado LIKE ?";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array("%$data%","%$data%","%$data%","%$data%"));
+      $data= $query->fetchAll(PDO::FETCH_BOTH);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $data;
+  }
+
+  //Funcion para buscar todos las pantallas que este registradas en el sistema
+
+  public function ReadPantalla(){
+    try {
+      $sql= "SELECT * FROM pantalla";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchAll(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -180,6 +240,36 @@ class UserModel{
     }
   }
 
+  //Funcion para buscar un teclado determinado en la base de datos
+
+  public function SearchTeclado($data){
+    try {
+      $sql= "SELECT * FROM teclado WHERE tec_serial LIKE ? OR tec_type LIKE ? OR tec_consecutivo LIKE ? OR tec_estado LIKE ?";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array("%$data%","%$data%","%$data%","%$data%"));
+      $data= $query->fetchALL(PDO::FETCH_BOTH);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $data;
+  }
+
+  //Funcion para buscar todos los teclados registrados en la base de datos
+
+  public function ReadTeclado(){
+    try {
+      $sql= "SELECT * FROM teclado";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                                                                            //
   //                                             HARDPHONE                                                      //
@@ -212,6 +302,36 @@ class UserModel{
     }
   }
 
+  //Funcion para buscar un hardphone determinado en la base de datos
+
+  public function SearchHardphone($data){
+    try {
+      $sql= "SELECT * FROM hardphone WHERE hard_serial LIKE ? OR hard_type LIKE ? OR hard_consecutivo LIKE ? OR hard_estado LIKE ?";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array("%$data%","%$data%","%$data%","%$data%"));
+      $data= $query->fetchALL(PDO::FETCH_BOTH);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $data;
+  }
+
+  //Funcion para buscar todos los hardphones registrados en la base de datos
+
+  public function ReadHardphone(){
+    try {
+      $sql= "SELECT * FROM hardphone";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                                                                            //
   //                                             ASIGNACION                                                     //
@@ -231,6 +351,36 @@ class UserModel{
       die($e->getMessage());
     }
     return $msn;
+  }
+
+  //Funcion para buscar asignaciones determinadas en la base de datos
+
+  public function SearchAsignacion($data){
+    try {
+      $sql= "SELECT * FROM asignacion WHERE asig_piso LIKE ? OR asig_oficina LIKE ? OR asig_puesto LIKE ? OR asig_extension LIKE ?";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array("%$data%","%$data%","%$data%","%$data%"));
+      $data= $query->fetchALL(PDO::FETCH_BOTH);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $data;
+  }
+
+  //Funcion para buscar todas las asignaciones registradas en la base de datos
+
+  public function ReadAsignacion(){
+    try {
+      $sql= "SELECT * FROM asignacion";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+      
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

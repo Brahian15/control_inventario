@@ -115,6 +115,7 @@
       }else{
         $titulo= 'Ver equipos';
         require_once 'view/include/header.php';
+        $result= $this->model->ReadEquipo();
         require_once 'view/modules/admin/readEqui.php';
         require_once 'view/include/footer.php';
       }
@@ -154,11 +155,12 @@
     //Funcion para cargar las pantallas que estan registradas en el sistema
 
     public function ReadPantalla(){
-      if(!isset($_SESSION[""])){
+      if(!isset($_SESSION["user"])){
         header("Location: ?c=admin&a=login");
       }else{
         $titulo= 'Ver pantalla';
         require_once 'view/include/header.php';
+        $result= $this->model->ReadPantalla();
         require_once 'view/modules/admin/readPantalla.php';
         require_once 'view/include/footer.php';
       }
@@ -203,6 +205,7 @@
       }else{
         $titulo= 'Ver teclado';
         require_once 'view/include/header.php';
+        $result= $this->model->ReadTeclado();
         require_once 'view/modules/admin/readTeclado.php';
         require_once 'view/include/footer.php';
       }
@@ -247,6 +250,7 @@
       }else{
         $titulo= 'Ver hardphone';
         require_once 'view/include/header.php';
+        $result= $this->model->ReadHardphone();
         require_once 'view/modules/admin/readHardphone.php';
         require_once 'view/include/footer.php';
       }
@@ -291,6 +295,7 @@
       }else{
         $titulo= 'Ver asignacion';
         require_once 'view/include/header.php';
+        $result= $this->model->ReadAsignacion();
         require_once 'view/modules/admin/readAsignacion.php';
         require_once 'view/include/footer.php';
       }

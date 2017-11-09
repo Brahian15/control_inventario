@@ -1,5 +1,5 @@
 <div class="row z-depth-4" id="cuerpo">
-  <form class="" action="index.html" method="post">
+  <form action="" method="post">
 
     <nav>
       <ul id="dropdown1" class="dropdown-content">
@@ -25,6 +25,81 @@
         </ul>
       </div>
     </nav>
+
+    <form  action="?c=admin&a=ReadPantalla" method="GET">
+      <h3>Buscar pantallas</h3>
+
+      <div class="col s5 offset-s3">
+        <input type="text" name="user" autofocus>
+      </div>
+
+      <button type="submit" class="btn waves-effect waves-light col s1 blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Buscar"><i class="small material-icons">search</i></button>
+
+    </form>
+
+    <?php
+    if(isset($_POST['user'])){
+      $user= $_POST['user'];
+      $user= $this->model->SearchPantalla($user);
+      if(count($user)>0){
+        foreach($user as $row){ ?>
+
+    <table class="highlight bordered col s10 offset-s1">
+      <thead class="green darken-1">
+        <tr>
+          <th>Serial</th>
+          <th>Type</th>
+          <th>Consecutivo del inventario</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><?php echo $row['pant_serial']; ?></td>
+          <td><?php echo $row['pant_type']; ?></td>
+          <td><?php echo $row['pant_consecutivo']; ?></td>
+          <td><?php echo $row['pant_estado']; ?></td>
+          <td><a href="" class="btn waves-efect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar pantalla" onclick="return confirm('¿Desea eliminar la pantalla permanentemente?')"><i class="small material-icons">delete</i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  <?php }
+
+  }else{
+    echo "<h5 class='info'>No se han encontrado resultados</h5>";
+  }
+}else{  ?>
+
+    <table class="highlight bordered col s10 offset-s1">
+      <thead class="green darken-1">
+        <tr>
+          <th>Serial</th>
+          <th>Type</th>
+          <th>Consecutivo del inventario</th>
+          <th>Estado</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+
+      <?php foreach($result as $data){ ?>
+
+      <tbody>
+        <tr>
+          <td><?php echo $data->pant_serial; ?></td>
+          <td><?php echo $data->pant_type; ?></td>
+          <td><?php echo $data->pant_consecutivo; ?></td>
+          <td><?php echo $data->pant_estado; ?></td>
+          <td><a href="" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar pantalla" onclick="return confirm('¿Desea eliminar la pantalla permanentemente?')"><i class="small material-icons">delete</i></a></td>
+        </tr>
+      </tbody>
+
+    <?php } ?>
+
+    </table>
+
+  <?php } ?>
 
   </form>
 </div>

@@ -15,4 +15,9 @@
 <script type="text/javascript">
   $('#textarea1').trigger('autoresize');
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+  $('.tooltipped').tooltip({delay: 50});
+});
+</script>
 </html>
