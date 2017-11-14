@@ -342,9 +342,9 @@ class UserModel{
 
   public function CreateAsignacion($data){
     try {
-      $sql= "INSERT INTO asignacion VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      $sql= "INSERT INTO asignacion VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       $query= $this->pdo->prepare($sql);
-      $query->execute(array($data[18],$data[19],$data[20],$data[21],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[8],$data[9],$data[10],$data[11],$data[12],$data[13],$data[14],$data[15],$data[16],$data[17],$data[22]));
+      $query->execute(array($data[18],$data[19],$data[20],$data[21],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[8],$data[9],$data[10],$data[11],$data[12],$data[13],$data[14],$data[15],$data[16],$data[17],$data[22],$data[23]));
       $msn= "La asignacion guardó exitosamente.";
 
     } catch (PDOException $e) {
@@ -357,9 +357,9 @@ class UserModel{
 
   public function SearchAsignacion($data){
     try {
-      $sql= "SELECT * FROM asignacion WHERE asig_piso LIKE ? OR asig_oficina LIKE ? OR asig_puesto LIKE ? OR asig_extension LIKE ?";
+      $sql= "SELECT * FROM asignacion INNER JOIN equipo ON(asignacion.equi_id = equipo.equi_id) INNER JOIN pantalla ON(asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON(asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON(asignacion.hard_id = hardphone.hard_id) INNER JOIN usuario ON(asignacion.user_id = usuario.user_id) WHERE asig_piso LIKE ? OR asig_oficina LIKE ? OR asig_puesto LIKE ? OR equi_serial LIKE ? OR pant_serial LIKE ? OR tec_serial LIKE ? OR hard_serial LIKE ? OR user_name LIKE ? OR asig_fecha LIKE ?";
       $query= $this->pdo->prepare($sql);
-      $query->execute(array("%$data%","%$data%","%$data%","%$data%"));
+      $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%"));
       $data= $query->fetchALL(PDO::FETCH_BOTH);
 
     } catch (PDOException $e) {
@@ -372,11 +372,11 @@ class UserModel{
 
   public function ReadAsignacion(){
     try {
-      $sql= "SELECT * FROM asignacion";
+      $sql= "SELECT * FROM asignacion INNER JOIN equipo ON(asignacion.equi_id = equipo.equi_id) INNER JOIN pantalla ON(asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON(asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON(asignacion.hard_id = hardphone.hard_id) INNER JOIN usuario ON(asignacion.user_id = usuario.user_id)";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_OBJ);
-      
+
     } catch (PDOException $e) {
       die($e->getMessage());
     }

@@ -68,7 +68,7 @@
   <?php }
 
   }else{
-    echo "<h5 class='info'>No se han encontrado resultados</h5>";
+    echo "<br><br><br><br><h5 class='info'>No se han encontrado resultados</h5>";
   }
 }else{  ?>
 

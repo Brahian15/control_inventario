@@ -26,6 +26,8 @@
       </div>
     </nav>
 
+    <?php $fecha= date("Y-m-d"); ?>
+
     <h3>Registro de asignación</h3>
 
     <div class="input-field col s4 offset-s2">
@@ -47,11 +49,6 @@
       <input type="text" name="data[]" class="validate" required>
       <label>Extensión</label>
     </div>
-
-    <!-- <div class="input-field col s8 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Hostname</label>
-    </div> -->
 
     <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" class="validate" required>
@@ -140,6 +137,10 @@
     <div class="input-field col s4">
       <input type="text" name="data[]" class="validate" required>
       <label>Serial del Hardphone</label>
+    </div>
+
+    <div class="input-field col s8 offset-s2">
+      <input type="date" name="data[]" value="<?php echo $fecha; ?>" class="validate tooltipped" required data-position="right" data-tooltip="Fecha de asignación">
     </div>
 
     <div class="input-field col s8 offset-s2">

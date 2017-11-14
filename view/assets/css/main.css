@@ -2,6 +2,10 @@ body{
   background-color: #455a64;
 }
 
+table{
+  margin-bottom: 30px;
+}
+
 #titleLogin{
   color: white;
 }
