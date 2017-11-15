@@ -78,11 +78,11 @@
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                            //
-    //                                                EQUIPO                                                      //
+    //                                                 CPU                                                        //
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Funcion cargar el formulario de registro de los equipos en el sistema
+    //Funcion cargar el formulario de registro de las CPU en el sistema
 
     public function Equipo(){
       if(!isset($_SESSION["user"])){
@@ -95,7 +95,7 @@
       }
     }
 
-    //Funcion para guardar equipos en el sistema
+    //Funcion para guardar las CPU en el sistema
 
     public function CreateEquipo(){
       if(!isset($_SESSION["user"])){
@@ -107,7 +107,7 @@
       }
     }
 
-    //Funcion de pagina principal y de carga de datos de los equipos registrados en el sistema
+    //Funcion de pagina principal y de carga de datos de las CPU registradas en el sistema
 
     public function dashboard(){
       if(!isset($_SESSION["user"])){
@@ -116,8 +116,47 @@
         $titulo= 'Ver equipos';
         require_once 'view/include/header.php';
         $result= $this->model->ReadEquipo();
-        require_once 'view/modules/admin/readEqui.php';
+        require_once 'view/modules/admin/readEquipo.php';
         require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para ver los datos de una CPU determinada en el sistema
+
+    public function DetalleEquipo(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= "Detalle del equipo";
+        require_once 'view/include/header.php';
+        $detalle= $_GET['detalle'];
+        $result= $this->model->DetalleEquipo($detalle);
+        require_once 'view/modules/admin/detalleEquipo.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para actualizar los datos de una CPU determinada en el sistema
+
+    public function UpdateEquipo(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->UpdateEquipo($data);
+        header("Location: ?c=admin&a=dashboard&msn=$result");
+      }
+    }
+
+    //Funcion para eliminar una CPU determinada en el sistema
+
+    public function DeleteEquipo(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $id= $_GET['id'];
+        $result= $this->model->DeleteEquipo($id);
+        header("Location: ?c=admin&a=dashboard&msn=$result");
       }
     }
 
@@ -166,6 +205,45 @@
       }
     }
 
+    //Function para ver los datos de un equipo determinado en el Sistema
+
+    public function DetallePantalla(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= "Detalle de la pantalla";
+        require_once 'view/include/header.php';
+        $detalle= $_GET['detalle'];
+        $result= $this->model->DetallePantalla($detalle);
+        require_once 'view/modules/admin/detallePantalla.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para actualizar los datos de una pantalla determinada en el sistema
+
+    public function UpdatePantalla(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST['data'];
+        $result= $this->model->UpdatePantalla($data);
+        header("Location: ?c=admin&a=ReadPantalla&msn=$result");
+      }
+    }
+
+    //Funcion para eliminar una pantalla determinada en el sistema
+
+    public function DeletePantalla(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $id= $_GET['id'];
+        $result= $this->model->DeletePantalla($id);
+        header("Location: ?c=admin&a=ReadPantalla&msn=$result");
+      }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                            //
     //                                               TECLADO                                                      //
@@ -208,6 +286,45 @@
         $result= $this->model->ReadTeclado();
         require_once 'view/modules/admin/readTeclado.php';
         require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para ver los datos de un teclado determinado en el sistema
+
+    public function DetalleTeclado(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo="Detalle del teclado";
+        require_once 'view/include/header.php';
+        $detalle= $_GET['detalle'];
+        $result= $this->model->DetalleTeclado($detalle);
+        require_once 'view/modules/admin/detalleTeclado.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para actualizar los datos de un teclado determinado en el sistema
+
+    public function UpdateTeclado(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->UpdateTeclado($data);
+        header("Location: ?c=admin&a=ReadTeclado&msn=$result");
+      }
+    }
+
+    //Funcion para eliminar un teclado determinado en el sistema
+
+    public function DeleteTeclado(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $id= $_GET['id'];
+        $result= $this->model->DeleteTeclado($id);
+        header("Location: ?c=admin&a=ReadTeclado&msn=$result");
       }
     }
 

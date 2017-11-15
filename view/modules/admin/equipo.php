@@ -3,7 +3,7 @@
 
     <nav>
       <ul id="dropdown1" class="dropdown-content">
-        <li><a href="?c=admin&a=dashboard">Equipo</a></li>
+        <li><a href="?c=admin&a=dashboard">CPU</a></li>
         <li class="divider"></li>
         <li><a href="?c=admin&a=ReadPantalla">Pantalla</a></li>
         <li class="divider"></li>
@@ -16,7 +16,7 @@
       <div class="nav-wrapper green darken-1">
         <ul>
           <li><a class="dropdown-button" data-activates="dropdown1" href="">Buscar<i class="material-icons right">arrow_drop_down</i></a></li>
-          <li class="active"><a href="?c=admin&a=Equipo">Equipo</a></li>
+          <li class="active"><a href="?c=admin&a=Equipo">CPU</a></li>
           <li><a href="?c=admin&a=Pantalla">Pantalla</a></li>
           <li><a href="?c=admin&a=Teclado">Teclado</a></li>
           <li><a href="?c=admin&a=Hardphone">Hardphone</a></li>
@@ -26,7 +26,7 @@
       </div>
     </nav>
 
-    <h3>Registro de equipos</h3>
+    <h3>Registro de CPU</h3>
 
     <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" class="validate" required autofocus>

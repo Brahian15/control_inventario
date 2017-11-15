@@ -85,11 +85,11 @@ class UserModel{
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                                                                            //
-  //                                               EQUIPOS                                                      //
+  //                                                 CPU                                                        //
   //                                                                                                            //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  //funcion de validacion y registro de equipos en la base de datos
+  //funcion de validacion y registro de CPU en la base de datos
 
   public function CreateEquipo($data){
     $sql= "SELECT * FROM equipo WHERE equi_serial= '$data[0]' OR equi_type= '$data[1]' OR equi_consecutivo= '$data[2]' OR equi_hostname= '$data[3]'";
@@ -106,7 +106,7 @@ class UserModel{
         $sql= "INSERT INTO equipo VALUES('',?,?,?,?,?)";
         $query= $this->pdo->prepare($sql);
         $query->execute(array($data[0],$data[1],$data[2],$data[3],"Sin asignacion"));
-        $msn= "El equipo fue guardado exitosamente.";
+        $msn= "La CPU fue guardada exitosamente.";
 
       } catch (PDOException $e) {
         die($e->getMessage());
@@ -115,7 +115,7 @@ class UserModel{
     }
   }
 
-  //Funcion para buscar un equipo determinado en la base de datos
+  //Funcion para buscar una CPU determinado en la base de datos
 
   public function SearchEquipo($data){
     try {
@@ -130,7 +130,7 @@ class UserModel{
     return $data;
   }
 
-  //Funcion para buscar todos los de los equipos que esten registrados en la base de datos
+  //Funcion para buscar todos los de las CPU que esten registrados en la base de datos
 
   public function ReadEquipo(){
     try {
@@ -143,6 +143,63 @@ class UserModel{
       die($e->getMessage());
     }
     return $result;
+  }
+
+  //Funcion para ver el detalle de una CPU determinado en la base de datos
+
+  public function DetalleEquipo($detalle){
+    try {
+      $sql= "SELECT * FROM equipo WHERE equi_serial= '$detalle'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion para actualizar los datos de una CPU determinado en la base de datos
+
+  public function UpdateEquipo($data){
+    try {
+      $sql= "UPDATE equipo SET equi_type= '$data[1]', equi_consecutivo= '$data[2]', equi_hostname= '$data[3]' WHERE equi_serial= :equi_id";
+      $query= $this->pdo->prepare($sql);
+      $query->bindValue(":equi_id",$data[0]);
+      $query->execute();
+      $msn= "La CPU se ha actualizado correctamente.";
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $msn;
+  }
+
+  //Funcion para eliminar una CPU determinado en la base de datos
+
+  public function DeleteEquipo($id){
+    $sql= "SELECT * FROM equipo WHERE equi_id= '$id' AND equi_estado= 'Asignado'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $asignacion= $query->rowCount();
+
+    if($asignacion== true){
+      $msn= "La CPU no se puede eliminar ya que esta asignado a un puesto.";
+
+      return $msn;
+    }else{
+      try {
+        $sql= "DELETE FROM equipo WHERE equi_id='$id'";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $msn= "La CPU se ha eliminado correctamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -178,7 +235,7 @@ class UserModel{
     }
   }
 
-  //Funcion para buscar un equipo determinado en la base de datos
+  //Funcion para buscar una pantalla determinada en la base de datos
 
   public function SearchPantalla($data){
     try {
@@ -206,6 +263,63 @@ class UserModel{
       die($e->getMessage());
     }
     return $result;
+  }
+
+  //Funcion para ver el detalle de un equipo determinado en la base de datos
+
+  public function DetallePantalla($detalle){
+    try {
+      $sql= "SELECT * FROM pantalla WHERE pant_serial= '$detalle'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion para actuzalizar la pantalla en la base de datos
+
+  public function UpdatePantalla($data){
+    try {
+      $sql= "UPDATE pantalla SET pant_type= '$data[1]', pant_consecutivo= '$data[2]' WHERE pant_serial= :pant_id";
+      $query= $this->pdo->prepare($sql);
+      $query->bindValue(":pant_id",$data[0]);
+      $query->execute();
+      $msn= "La pantalla se ha actualizado exitosamente.";
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $msn;
+  }
+
+  //Funcion para eliminar una pantalla determinada en la base de datos
+
+  public function DeletePantalla($id){
+    $sql= "SELECT * FROM pantalla WHERE pant_id= '$id' AND pant_estado= 'Asignado'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $asignacion= $query->rowCount();
+
+    if($asignacion== true){
+      $msn= "La CPU no se puede eliminar ya que esta asignado a un puesto.";
+
+      return $msn;
+    }else {
+      try {
+        $sql= "DELETE FROM pantalla WHERE pant_id= '$id'";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $msn= "La pantalla se ha eliminado correctamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -268,6 +382,63 @@ class UserModel{
       die($e->getMessage());
     }
     return $result;
+  }
+
+  //Funcion para ver el detalle de un teclado determinado en la base de datos
+
+  public function DetalleTeclado($detalle){
+    try {
+      $sql= "SELECT * FROM teclado WHERE tec_serial= '$detalle'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Function para actualizar los datos de un teclado determinado en la base de datos
+
+  public function UpdateTeclado($data){
+    try {
+      $sql= "UPDATE teclado SET tec_type= '$data[1]', tec_consecutivo= '$data[2]' WHERE tec_serial= :tec_id";
+      $query= $this->pdo->prepare($sql);
+      $query->bindValue(":tec_id",$data[0]);
+      $query->execute();
+      $msn= "El teclado se ha actualizado correctamente.";
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $msn;
+  }
+
+  //Funcion para eliminar un teclado determinado en la base de datos
+
+  public function DeleteTeclado($id){
+    $sql= "SELECT * FROM teclado WHERE tec_id= '$id' AND tec_estado= 'Asignado'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $asignacion= $query->rowCount();
+
+    if($asignacion== true){
+      $msn= "El teclado no se puede eliminar ya que esta asignado a un puesto.";
+
+      return $msn;
+    }else{
+      try {
+        $sql= "DELETE FROM teclado WHERE tec_id= '$id'";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $msn= "El teclado se ha eliminado correctamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

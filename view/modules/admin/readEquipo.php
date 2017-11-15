@@ -3,7 +3,7 @@
 
     <nav>
       <ul id="dropdown1" class="dropdown-content">
-        <li class="active"><a href="?c=admin&a=dashboard">Equipo</a></li>
+        <li class="active"><a href="?c=admin&a=dashboard">CPU</a></li>
         <li class="divider"></li>
         <li><a href="?c=admin&a=ReadPantalla">Pantalla</a></li>
         <li class="divider"></li>
@@ -16,7 +16,7 @@
       <div class="nav-wrapper green darken-1">
         <ul>
           <li class="active"><a class="dropdown-button" data-activates="dropdown1" href="">Buscar<i class="material-icons right">arrow_drop_down</i></a></li>
-          <li><a href="?c=admin&a=Equipo">Equipo</a></li>
+          <li><a href="?c=admin&a=Equipo">CPU</a></li>
           <li><a href="?c=admin&a=Pantalla">Pantalla</a></li>
           <li><a href="?c=admin&a=Teclado">Teclado</a></li>
           <li><a href="?c=admin&a=Hardphone">Hardphone</a></li>
@@ -27,7 +27,7 @@
     </nav>
 
     <form action="?c=admin&a=dashboard" method="GET">
-      <h3>Buscar equipos</h3>
+      <h3>Buscar CPU</h3>
 
       <div class="input-field col s5 offset-s3">
         <input type="text" name="user" autofocus>
@@ -52,6 +52,7 @@
                   <th>Hostname</th>
                   <th>Estado</th>
                   <th>Acción</th>
+                  <th></th>
                 </tr>
               </thead>
 
@@ -62,7 +63,8 @@
                   <td><?php echo $row['equi_consecutivo']; ?></td>
                   <td><?php echo $row['equi_hostname']; ?></td>
                   <td><?php echo $row['equi_estado']; ?></td>
-                  <td><a href="" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar usuario" onclick="return confirm('¿Desea eliminar el equipo permanentemente?')"><i class="small material-icons">delete</i></a></td>
+                  <td><a href="?detalle=<?php echo $row['equi_serial']; ?>&c=admin&a=DetalleEquipo" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Detalle de la CPU"><i class="small material-icons">update</i></a></td>
+                  <td><a href="?id=<?php echo $row['equi_id']; ?>&c=admin&a=DeleteEquipo" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar CPU" onclick="return confirm('¿Desea eliminar la CPU permanentemente?')"><i class="small material-icons">delete</i></a></td>
                 </tr>
               </tbody>
             </table>
@@ -83,6 +85,7 @@
             <th>Hostname</th>
             <th>Estado</th>
             <th>Acción</th>
+            <th></th>
           </tr>
         </thead>
 
@@ -95,7 +98,8 @@
             <td><?php echo $data->equi_consecutivo; ?></td>
             <td><?php echo $data->equi_hostname; ?></td>
             <td><?php echo $data->equi_estado; ?></td>
-            <td><a href="" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar equipo" onclick="return confirm('¿Desea eliminar el equipo permanentemente?')"><i class="small material-icons">delete</i></a></td>
+            <td><a href="?detalle=<?php echo $data->equi_serial; ?>&c=admin&a=DetalleEquipo" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Detalle de la CPU"><i class="small material-icons">update</i></a></td>
+            <td><a href="?id=<?php echo $data->equi_id; ?>&c=admin&a=DeleteEquipo" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar CPU" onclick="return confirm('¿Desea eliminar la CPU permanentemente?')"><i class="small material-icons">delete</i></a></td>
           </tr>
         </tbody>
 
