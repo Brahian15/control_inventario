@@ -20,7 +20,7 @@
         <li><a href="?c=admin&a=Teclado">Teclado</a></li>
         <li><a href="?c=admin&a=Hardphone">Hardphone</a></li>
         <li><a href="?c=admin&a=Asignacion">Asignacion</a></li>
-        <li><a href="?c=admin&a=logout">Cerrar sesion</a></li>
+        <li><a href="?c=admin&a=logout" onclick="return confirm('¿Desea cerrar sesion?')">Cerrar sesion</a></li>
       </ul>
     </div>
   </nav>

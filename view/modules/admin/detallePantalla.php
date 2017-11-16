@@ -20,7 +20,7 @@
         <li><a href="?c=admin&a=Teclado">Teclado</a></li>
         <li><a href="?c=admin&a=Hardphone">Hardphone</a></li>
         <li><a href="?c=admin&a=Asignacion">Asignacion</a></li>
-        <li><a href="?c=admin&a=logout">Cerrar sesion</a></li>
+        <li><a href="?c=admin&a=logout" onclick="return confirm('¿Desea cerrar sesion?')">Cerrar sesion</a></li>
       </ul>
     </div>
   </nav>
@@ -40,7 +40,7 @@
       <label>Type</label>
     </div>
 
-    <div class="input-field col s4 offset-s2">
+    <div class="input-field col s8 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->pant_consecutivo ?>" required>
       <label>Consecutivo del inventario</label>
     </div>

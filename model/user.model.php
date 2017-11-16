@@ -89,7 +89,7 @@ class UserModel{
   //                                                                                                            //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  //funcion de validacion y registro de CPU en la base de datos
+  //Funcion de validacion y registro de CPU en la base de datos
 
   public function CreateEquipo($data){
     $sql= "SELECT * FROM equipo WHERE equi_serial= '$data[0]' OR equi_type= '$data[1]' OR equi_consecutivo= '$data[2]' OR equi_hostname= '$data[3]'";
@@ -115,7 +115,7 @@ class UserModel{
     }
   }
 
-  //Funcion para buscar una CPU determinado en la base de datos
+  //Funcion para buscar una CPU determinada en la base de datos
 
   public function SearchEquipo($data){
     try {
@@ -130,7 +130,7 @@ class UserModel{
     return $data;
   }
 
-  //Funcion para buscar todos los de las CPU que esten registrados en la base de datos
+  //Funcion para buscar todas las CPU que esten registrados en la base de datos
 
   public function ReadEquipo(){
     try {
@@ -138,6 +138,21 @@ class UserModel{
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion para ver los datos de las CPU que esten registradas en la base de datos para la asignacion
+
+  public function ReadEquipobyAsignacion(){
+    try {
+      $sql= "SELECT * FROM equipo ORDER BY equi_serial ASC";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_BOTH);
 
     } catch (PDOException $e) {
       die($e->getMessage());
@@ -250,7 +265,7 @@ class UserModel{
     return $data;
   }
 
-  //Funcion para buscar todos las pantallas que este registradas en el sistema
+  //Funcion para buscar todos las pantallas que esten registradas en la base de datos
 
   public function ReadPantalla(){
     try {
@@ -258,6 +273,21 @@ class UserModel{
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchAll(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion para ver todas las pantallas que esten registradas en la base de datos para la asignacion
+
+  public function ReadPantallabyAsignacion(){
+    try {
+      $sql= "SELECT * FROM pantalla ORDER BY pant_serial ASC";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_BOTH);
 
     } catch (PDOException $e) {
       die($e->getMessage());
@@ -369,7 +399,7 @@ class UserModel{
     return $data;
   }
 
-  //Funcion para buscar todos los teclados registrados en la base de datos
+  //Funcion para buscar todos los teclados que esten registrados en la base de datos
 
   public function ReadTeclado(){
     try {
@@ -377,6 +407,21 @@ class UserModel{
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion para ver todos los teclados que esten registrados en la base de datos para la asignacion
+
+  public function ReadTecladobyAsignacion(){
+    try {
+      $sql= "SELECT * FROM teclado ORDER BY tec_serial ASC";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_BOTH);
 
     } catch (PDOException $e) {
       die($e->getMessage());
@@ -488,7 +533,7 @@ class UserModel{
     return $data;
   }
 
-  //Funcion para buscar todos los hardphones registrados en la base de datos
+  //Funcion para buscar todos los hardphones que estan registrados en la base de datos
 
   public function ReadHardphone(){
     try {
@@ -503,6 +548,78 @@ class UserModel{
     return $result;
   }
 
+  //Funcion para ver todos los harphone que estan registrados en la base de datos para la asignacion
+
+  public function ReadHardphonebyAsignacion(){
+    try {
+      $sql= "SELECT * FROM hardphone ORDER BY hard_serial ASC";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_BOTH);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion para ver el detalle de un hardphone determinado en la base de datos
+
+  public function DetalleHardphone($detalle){
+    try {
+      $sql= "SELECT * FROM hardphone WHERE hard_serial= '$detalle'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion para actualizar los datos de un hardphone determinado en la base de datos
+
+  public function UpdateHardphone($data){
+    try {
+      $sql= "UPDATE hardphone SET hard_type= '$data[1]', hard_consecutivo= '$data[2]' WHERE hard_serial= :hard_id";
+      $query= $this->pdo->prepare($sql);
+      $query->bindValue(":hard_id",$data[0]);
+      $query->execute();
+      $msn= "El hardphone se ha actualizado correctamente.";
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $msn;
+  }
+
+  //Funcion para eliminar un hardphone determinado en la base de datos
+
+  public function DeleteHardphone($id){
+    $sql= "SELECT * FROM hardphone WHERE hard_id= '$id' AND hard_estado= 'Asignado'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $asignacion= $query->rowCount();
+
+    if($asignacion== true){
+      $msn= "El hardphone no se puede eliminar ya que esta asignado a un puesto.";
+
+      return $msn;
+    }else{
+      try {
+        $sql= "DELETE FROM hardphone WHERE hard_id= '$id'";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $msn= "El hardphone se ha eliminado correctamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                                                                            //
   //                                             ASIGNACION                                                     //
@@ -512,17 +629,72 @@ class UserModel{
   //Funcion de validacion y registro asignaciones en la base de datos
 
   public function CreateAsignacion($data){
-    try {
-      $sql= "INSERT INTO asignacion VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-      $query= $this->pdo->prepare($sql);
-      $query->execute(array($data[18],$data[19],$data[20],$data[21],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[8],$data[9],$data[10],$data[11],$data[12],$data[13],$data[14],$data[15],$data[16],$data[17],$data[22],$data[23]));
-      $msn= "La asignacion guardó exitosamente.";
 
-    } catch (PDOException $e) {
-      die($e->getMessage());
+    $sql= "SELECT * FROM equipo WHERE equi_id= '$data[18]' AND equi_estado= 'Asignado'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $equi_asignacion= $query->rowCount();
+
+    $sql= "SELECT * FROM pantalla WHERE pant_id= '$data[19]' AND pant_estado= 'Asignado'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $pant_asignacion= $query->rowCount();
+
+    $sql= "SELECT * FROM teclado WHERE tec_id= '$data[20]' AND tec_estado= 'Asignado'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $tec_asignacion= $query->rowCount();
+
+    $sql= "SELECT * FROM hardphone WHERE hard_id= '$data[21]' AND hard_estado= 'Asignado'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $hard_asignacion= $query->rowCount();
+
+    if($equi_asignacion== true){
+      $msn= "La CPU ya se encuentra asignada a un puesto.";
+
+      return $msn;
+    }elseif($pant_asignacion== true){
+      $msn= "La PANTALLA ya se encuentra asignada a un puesto.";
+
+      return $msn;
+    }elseif($tec_asignacion== true){
+      $msn= "El TECLADO ya se encuentra asignado a un puesto.";
+
+      return $msn;
+    }elseif($hard_asignacion== true){
+      $msn= "El HARDPHONE ya se encuentra asignado a un puesto.";
+
+      return $msn;
+      }else{
+        try {
+          $sql= "INSERT INTO asignacion VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+          $query= $this->pdo->prepare($sql);
+          $query->execute(array($data[18],$data[19],$data[20],$data[21],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[8],$data[9],$data[10],$data[11],$data[12],$data[13],$data[14],$data[15],$data[16],$data[17],$data[22],$data[23]));
+          $msn= "La asignacion guardó exitosamente.";
+
+          $sql= "UPDATE equipo SET equi_estado= 'Asignado' WHERE equi_id= '$data[18]'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+
+          $sql= "UPDATE pantalla SET pant_estado= 'Asignado' WHERE pant_id= '$data[19]'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+
+          $sql= "UPDATE teclado SET tec_estado= 'Asignado' WHERE tec_id= '$data[20]'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+
+          $sql= "UPDATE hardphone SET hard_estado= 'Asignado' WHERE hard_id= '$data[21]'";
+          $query= $this->pdo->prepare($sql);
+          $query->execute();
+
+        } catch (PDOException $e) {
+          die($e->getMessage());
+        }
+        return $msn;
+      }
     }
-    return $msn;
-  }
 
   //Funcion para buscar asignaciones determinadas en la base de datos
 

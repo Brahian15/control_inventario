@@ -6,9 +6,9 @@
       <li class="divider"></li>
       <li><a href="?c=admin&a=ReadPantalla">Pantalla</a></li>
       <li class="divider"></li>
-      <li class="active"><a href="?c=admin&a=ReadTeclado">Teclado</a></li>
+      <li><a href="?c=admin&a=ReadTeclado">Teclado</a></li>
       <li class="divider"></li>
-      <li><a href="?c=admin&a=ReadHardphone">Hardphone</a></li>
+      <li class="active"><a href="?c=admin&a=ReadHardphone">Hardphone</a></li>
       <li class="divider"></li>
       <li><a href="?c=admin&a=ReadAsignacion">Asignacion</a></li>
     </ul>
@@ -25,31 +25,32 @@
     </div>
   </nav>
 
-  <form action="?c=admin&a=UpdateTeclado" method="post">
-    <h3>Detalle del teclado</h3>
+  <form action="?c=admin&a=UpdateHardphone" method="post">
+    <h3>Detalle del hardphone</h3>
 
     <?php foreach($result as $data){ ?>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->tec_serial; ?>" required>
+      <input type="text" name="data[]" value="<?php echo $data->hard_serial; ?>" required>
       <label>Serial</label>
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" value="<?php echo $data->tec_type; ?>" required>
+      <input type="text" name="data[]" value="<?php echo $data->hard_type; ?>" required>
       <label>Type</label>
     </div>
 
     <div class="input-field col s8 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->tec_consecutivo; ?>" required>
+      <input type="text" name="data[]" value="<?php echo $data->hard_consecutivo; ?>" required>
       <label>Consecutivo del inventario</label>
     </div>
 
     <button id="btn" type="submit" class="btn waves-effect waves-light col s4 offset-s2 green darken-1">Actualizar</button>
 
   <?php } ?>
+
   </form>
 
-  <a href="?c=admin&a=ReadTeclado" class="btn waves-effect waves-light col s4 blue-grey darken-2">Cancelar</a>
+  <a href="?c=admin&a=ReadHardphone" class="btn waves-effect waves-light col s4 blue-grey darken-2">Cancelar</a>
 
 </div>

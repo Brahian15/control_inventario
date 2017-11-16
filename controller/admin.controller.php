@@ -275,7 +275,7 @@
       }
     }
 
-    //Funcion para ver los teclados que estan registados en el sistema
+    //Funcion para cargar los teclados que estan registados en el sistema
 
     public function ReadTeclado(){
       if(!isset($_SESSION["user"])){
@@ -334,7 +334,7 @@
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Funcion para ver el formulario de registro de hardphone
+    //Funcion para cargar el formulario de registro de hardphone
 
     public function Hardphone(){
       if(!isset($_SESSION["user"])){
@@ -359,7 +359,7 @@
       }
     }
 
-    //Funcion para ver los hardphone que estan registrados en el sistema
+    //Funcion para cargar los hardphone que estan registrados en el sistema
 
     public function ReadHardphone(){
       if(!isset($_SESSION["user"])){
@@ -373,13 +373,52 @@
       }
     }
 
+    //Funcion para ver los datos de un hardphone determinado en el sistema
+
+    public function DetalleHardphone(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= "Detalle del hardphone";
+        require_once 'view/include/header.php';
+        $detalle= $_GET['detalle'];
+        $result= $this->model->DetalleHardphone($detalle);
+        require_once 'view/modules/admin/detalleHardphone.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para actualizar los datos de un hardphone determinado en el sistema
+
+    public function UpdateHardphone(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->UpdateHardphone($data);
+        header("Location: ?c=admin&a=ReadHardphone&msn=$result");
+      }
+    }
+
+    //Funcion para eliminar un hardphone determinado en el sistema
+
+    public function DeleteHardphone(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $id= $_GET["id"];
+        $result= $this->model->DeleteHardphone($id);
+        header("Location: ?c=admin&a=ReadHardphone&msn=$result");
+      }
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                            //
     //                                             ASIGNACION                                                     //
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Funcion para ver el formulario de registro de asignacion
+    //Funcion para cargar el formulario de registro de asignacion
 
     public function Asignacion(){
       if(!isset($_SESSION["user"])){
@@ -404,7 +443,7 @@
       }
     }
 
-    //Funcion para ver las asignaciones que estan registradas en el sistema
+    //Funcion para cargar las asignaciones que estan registradas en el sistema
 
     public function ReadAsignacion(){
       if(!isset($_SESSION["user"])){

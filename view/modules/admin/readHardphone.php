@@ -21,7 +21,7 @@
           <li><a href="?c=admin&a=Teclado">Teclado</a></li>
           <li><a href="?c=admin&a=Hardphone">Hardphone</a></li>
           <li><a href="?c=admin&a=Asignacion">Asignacion</a></li>
-          <li><a href="?c=admin&a=logout">Cerrar sesion</a></li>
+          <li><a href="?c=admin&a=logout" onclick="return confirm('¿Desea cerrar sesion?')">Cerrar sesion</a></li>
         </ul>
       </div>
     </nav>
@@ -52,6 +52,7 @@
           <th>Consecutivo del inventario</th>
           <th>Estado</th>
           <th>Acción</th>
+          <th></th>
         </tr>
       </thead>
 
@@ -61,7 +62,8 @@
           <td><?php echo $row['hard_type']; ?></td>
           <td><?php echo $row['hard_consecutivo']; ?></td>
           <td><?php echo $row['hard_estado'] ?></td>
-          <td><a href="" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar hardphone" onclick="return confirm('¿Desea eliminar el hardphone permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?detalle=<?php echo $row['hard_serial']; ?>&c=admin&a=DetalleHardphone" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Detalle del hardphone"><i class="small material-icons">update</i></a></td>
+          <td><a href="?id=<?php echo $row['hard_id']; ?>&c=admin&a=DeleteHardphone" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar hardphone" onclick="return confirm('¿Desea eliminar el hardphone permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
     </table>
@@ -81,6 +83,7 @@
           <th>Consecutivo del inventario</th>
           <th>Estado</th>
           <th>Acción</th>
+          <th></th>
         </tr>
       </thead>
 
@@ -92,7 +95,8 @@
           <td><?php echo $data->hard_type; ?></td>
           <td><?php echo $data->hard_consecutivo; ?></td>
           <td><?php echo $data->hard_estado; ?></td>
-          <td><a href="" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar hardphone" onclick="return confirm('¿Desea eliminar el hardphone permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?detalle=<?php echo $data->hard_serial; ?>&c=admin&a=DetalleHardphone" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Detalle del hardphone"><i class="small material-icons">update</i></a></td>
+          <td><a href="?id=<?php echo $data->hard_id; ?>&c=admin&a=DeleteHardphone" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar hardphone" onclick="return confirm('¿Desea eliminar el hardphone permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
 
