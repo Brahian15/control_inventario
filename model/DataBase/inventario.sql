@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2017 a las 23:32:26
+-- Tiempo de generación: 17-11-2017 a las 20:32:12
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -38,22 +38,11 @@ CREATE TABLE `asignacion` (
   `asig_piso` int(11) NOT NULL COMMENT 'En este campo se va a almacenar el piso en el que este asignado un equipo, pantalla, teclado o harphone determinado.',
   `asig_oficina` varchar(50) DEFAULT NULL COMMENT 'En este campo se va a almacenar la oficina en el que se encuentre un equipo, pantalla, teclado o harphone determinado',
   `asig_puesto` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el puesto que este asignado un equipo, pantalla, teclado o harphone determinado.',
-  `asig_extension` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar la extension en el que se encuentre asignado un hardphone determinado.',
   `asig_lob` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el lob que este asignado a un equipo, pantalla, teclado o hardphone determinado.',
   `asig_split` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el split que este asignado a un equipo, pantalla, teclado o hardphone determinado.',
   `asig_tipo_servicio` varchar(50) NOT NULL COMMENT 'Es este campo se va a almacenar el tipo de servicio que se va a dar en un puesto determinado.',
-  `asig_atid` varchar(50) NOT NULL COMMENT 'Este campo pertenece a amadeus ard y va a almacenar el atid que se le sea asignado.',
-  `asig_oid` varchar(50) NOT NULL COMMENT 'Este campo pertenece a amadeus ard y va a almacenar el oid que se le sea asignado.',
-  `asig_cid` varchar(50) NOT NULL COMMENT 'Este campo pertenece a amadeus ard y va a almacenar el cid que se le sea asignado.',
-  `asig_office` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar si el equipo va a tener office.',
-  `asig_version_office` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar, si posee office, la version de office que va a tener.',
-  `asig_cms_super` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el cms del supervisor en el area y puesto en el que va a estar el equipo, pantalla, teclado o hardphone determinado.',
-  `asig_super` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el nombre del supervisor en el area y puesto en el que va a estar el equipo, pantalla, teclado o hardphone determinado.',
-  `asig_nice_screen` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el Nice ScreenAgent que este asignado a un equipo determinado.',
-  `asig_nice` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el Nice que este asignado a un equipo determinado.',
-  `asig_spector` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el Spector360 que este asignado a un equipo determinado',
-  `asig_amadeus_cm` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el amadeus cm que este asignado a un equipo.',
-  `asig_obser` varchar(200) DEFAULT NULL COMMENT 'Este campo va a almacenar las observaciones que hayan sobre un equipo, pantalla, teclado o hardphone determinado.'
+  `asig_fecha` date NOT NULL COMMENT 'Este campo almacena la fecha en la que se realizo la asignacion',
+  `asig_obser` varchar(200) NOT NULL COMMENT 'Este campo va a almacenar las observaciones que hayan sobre un equipo, pantalla, teclado o hardphone determinado.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -68,6 +57,17 @@ CREATE TABLE `equipo` (
   `equi_type` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el type de cada equipo registrado.',
   `equi_consecutivo` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el consecutivo de inventario de cada equipo registrado.',
   `equi_hostname` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el hostname de cada equipo registrado.',
+  `equi_atid` varchar(50) NOT NULL COMMENT 'Este campo pertenece a amadeus ard y va a almacenar el atid que se le sea asignado.',
+  `equi_oid` varchar(50) NOT NULL COMMENT 'Este campo pertenece a amadeus ard y va a almacenar el oid que se le sea asignado.',
+  `equi_cid` varchar(50) NOT NULL COMMENT 'Este campo pertenece a amadeus ard y va a almacenar el cid que se le sea asignado.',
+  `equi_office` tinyint(1) NOT NULL COMMENT 'En este campo se va a almacenar si el equipo va a tener office.',
+  `equi_version_office` varchar(50) DEFAULT NULL COMMENT 'Este campo va a almacenar, si posee office, la version de office que va a tener.',
+  `equi_super` tinyint(1) NOT NULL COMMENT 'Este campo va a almacenar si el puesto tiene supervisor.',
+  `equi_cargo` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el cargo del supervisor.',
+  `equi_nice_screen` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el Nice ScreenAgent que este asignado a un equipo determinado.',
+  `equi_nice_super` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el Nice de un supervisor determinado',
+  `equi_spector` varchar(50) DEFAULT NULL COMMENT 'Este campo va a almacenar el Spector360 que este asignado a un equipo determinado',
+  `equi_amadeus_cm` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el amadeus cm que este asignado a un equipo.',
   `equi_estado` varchar(50) NOT NULL COMMENT 'Este campo almacena el estado de un equipo determinado, ya sea asignado o sin asignacion.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -75,8 +75,9 @@ CREATE TABLE `equipo` (
 -- Volcado de datos para la tabla `equipo`
 --
 
-INSERT INTO `equipo` (`equi_id`, `equi_serial`, `equi_type`, `equi_consecutivo`, `equi_hostname`, `equi_estado`) VALUES
-(1, '1308', 'asdf', 'ñlkj', 'qwerty', 'Sin asignacion');
+INSERT INTO `equipo` (`equi_id`, `equi_serial`, `equi_type`, `equi_consecutivo`, `equi_hostname`, `equi_atid`, `equi_oid`, `equi_cid`, `equi_office`, `equi_version_office`, `equi_super`, `equi_cargo`, `equi_nice_screen`, `equi_nice_super`, `equi_spector`, `equi_amadeus_cm`, `equi_estado`) VALUES
+(2, '1308', 'jbhj', 'hbh', 'bhbh', 'bhbh', 'bhb', 'hbh', 0, 'bhb', 0, 'njknjk', 'jn', 'jnjn', '|jnj', 'nj', 'Sin asignacion'),
+(3, '4555', 'kjbhj', 'bhh', 'hbhb', 'hbh', 'bhbh', 'bhb', 1, '', 1, '', 'asdf', 'sadf', 'asdf', 'sdaf', 'Sin asignacion');
 
 -- --------------------------------------------------------
 
@@ -89,6 +90,7 @@ CREATE TABLE `hardphone` (
   `hard_serial` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el serial del hardphone que se esta registrando.',
   `hard_type` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el type del hardphone que se esta registrando.',
   `hard_consecutivo` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el consecutivo de inventario de cada hardphone que se esta registrando.',
+  `hard_extension` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar la extension en el que se encuentre asignado un hardphone determinado.',
   `hard_estado` varchar(50) NOT NULL COMMENT 'Este campo almacena el estado de un hardphone determinado, ya sea asignado o sin asignacion.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -96,8 +98,8 @@ CREATE TABLE `hardphone` (
 -- Volcado de datos para la tabla `hardphone`
 --
 
-INSERT INTO `hardphone` (`hard_id`, `hard_serial`, `hard_type`, `hard_consecutivo`, `hard_estado`) VALUES
-(2, '1234', 'A384', 'asdf', 'Sin asignacion');
+INSERT INTO `hardphone` (`hard_id`, `hard_serial`, `hard_type`, `hard_consecutivo`, `hard_extension`, `hard_estado`) VALUES
+(1, '1308', 'jhbhj', 'bhh', 'bhbh', 'Sin asignacion');
 
 -- --------------------------------------------------------
 
@@ -118,7 +120,8 @@ CREATE TABLE `pantalla` (
 --
 
 INSERT INTO `pantalla` (`pant_id`, `pant_serial`, `pant_type`, `pant_consecutivo`, `pant_estado`) VALUES
-(2, '1234', 'A384', 'Fast', 'Sin asignacion');
+(3, '1234', 'cars', 'red', 'Asignado'),
+(5, '4555', 'kak', 'aksk', 'Sin asignacion');
 
 -- --------------------------------------------------------
 
@@ -158,7 +161,8 @@ CREATE TABLE `teclado` (
 --
 
 INSERT INTO `teclado` (`tec_id`, `tec_serial`, `tec_type`, `tec_consecutivo`, `tec_estado`) VALUES
-(1, '1234', 'A384', 'asdf', 'Sin asignacion');
+(1, '1234', 'A384', 'jknnj', 'Asignado'),
+(4, '4555', 'spdjcfoa3333', 'kjnjkl', 'Sin asignacion');
 
 -- --------------------------------------------------------
 
@@ -246,17 +250,17 @@ ALTER TABLE `asignacion`
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `equi_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se va a almacenar la clave primaria de cada equipo. Tambien es la llave primaria de la tabla.', AUTO_INCREMENT=2;
+  MODIFY `equi_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se va a almacenar la clave primaria de cada equipo. Tambien es la llave primaria de la tabla.', AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `hardphone`
 --
 ALTER TABLE `hardphone`
-  MODIFY `hard_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=3;
+  MODIFY `hard_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `pantalla`
 --
 ALTER TABLE `pantalla`
-  MODIFY `pant_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=3;
+  MODIFY `pant_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --
@@ -266,7 +270,7 @@ ALTER TABLE `rol`
 -- AUTO_INCREMENT de la tabla `teclado`
 --
 ALTER TABLE `teclado`
-  MODIFY `tec_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=2;
+  MODIFY `tec_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --

@@ -48,9 +48,72 @@
       <label>Hostname</label>
     </div>
 
-    <button id="btnGuardar" type="submit" class="btn waves-effect waves-light col s4 offset-s2 green darken-1">Guardar</button>
+    <p class="col s8 offset-s2 center">Amadeus ARD</p>
+
+    <div class="input-field col s3 offset-s2">
+      <input type="text" name="data[]" class="validate" required>
+      <label>ATID</label>
+    </div>
+
+    <div class="input-field col s2">
+      <input type="text" name="data[]" class="validate" required>
+      <label>OID</label>
+    </div>
+
+    <div class="input-field col s3">
+      <input type="text" name="data[]" class="validate" required>
+      <label>CID</label>
+    </div>
+
+    <div class="input-field col s4 offset-s2">
+      <select name="data[]">
+        <option disabled selected>Office</option>
+        <option value="0">Si</option>
+        <option value="1">No</option>
+      </select>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]">
+      <label>Version de office</label>
+    </div>
+
+    <div class="input-field col s4 offset-s2">
+      <select name="data[]">
+        <option disabled selected>Supervisor</option>
+        <option value="0">Si</option>
+        <option value="1">No</option>
+      </select>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]">
+      <label>Cargo</label>
+    </div>
+
+    <div class="input-field col s4 offset-s2">
+      <input type="text" name="data[]" class="validate" required>
+      <label>Nice ScreenAgent</label>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]" class="validate" required>
+      <label>Nice</label>
+    </div>
+
+    <div class="input-field col s4 offset-s2">
+      <input type="text" name="data[]">
+      <label>Spector360</label>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]" class="validate" required>
+      <label>Amadeus CM</label>
+    </div>
+
+    <button id="btnGuardarEqui" type="submit" class="btn waves-effect waves-light col s4 offset-s2 green darken-1">Guardar</button>
 
   </form>
 
-  <a href="?c=admin&a=dashboard" class="btn waves-effect waves-light col s4 blue-grey darken-2">Cancelar</a>
+  <a id="btnCancelarEqui" href="?c=admin&a=dashboard" class="btn waves-effect waves-light col s4 blue-grey darken-2">Cancelar</a>
 </div>

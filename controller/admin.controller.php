@@ -205,7 +205,7 @@
       }
     }
 
-    //Function para ver los datos de un equipo determinado en el Sistema
+    //Function para ver los datos de un equipo determinado en el sistema
 
     public function DetallePantalla(){
       if(!isset($_SESSION["user"])){
@@ -453,6 +453,21 @@
         require_once 'view/include/header.php';
         $result= $this->model->ReadAsignacion();
         require_once 'view/modules/admin/readAsignacion.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para ver los datos de un equipo determinado en el sistema
+
+    public function DetalleAsignacion(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= "Detalle de la asignacion";
+        require_once 'view/include/header.php';
+        $detalle= $_POST["detalle"];
+        $result= $this->model->DetalleAsignacion($detalle);
+        require_once 'view/modules/admin/detalleAsignacion.php';
         require_once 'view/include/footer.php';
       }
     }

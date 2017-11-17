@@ -47,76 +47,17 @@
 
     <div class="input-field col s4">
       <input type="text" name="data[]" class="validate" required>
-      <label>Extensión</label>
-    </div>
-
-    <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
       <label>LOB</label>
     </div>
 
-    <div class="input-field col s4">
+    <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" class="validate" required>
       <label>Split</label>
     </div>
 
-    <div class="input-field col s4 offset-s2">
+    <div class="input-field col s4">
       <input type="text" name="data[]" class="validate" required>
       <label>Tipo de servicio</label>
-    </div>
-
-    <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Amadeus ARD: ATID</label>
-    </div>
-
-    <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Amadeus ARD: OID</label>
-    </div>
-
-    <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Amadeus ARD: CID</label>
-    </div>
-
-    <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Office</label>
-    </div>
-
-    <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Version de office</label>
-    </div>
-
-    <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
-      <label>CMS Supervisor</label>
-    </div>
-
-    <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Supervisor</label>
-    </div>
-
-    <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Nice ScreenAgent</label>
-    </div>
-    <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Nice</label>
-    </div>
-
-    <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Spector360</label>
-    </div>
-
-    <div class="input-field col s4">
-      <input type="text" name="data[]" class="validate" required>
-      <label>Amadeus CM</label>
     </div>
 
     <div class="input-field col s4 offset-s2">

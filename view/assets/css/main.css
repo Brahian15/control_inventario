@@ -34,3 +34,18 @@ h3, h5{
   margin-bottom: 30px;
   margin-right: 5px;
 }
+
+p{
+  text-align: center;
+  font-weight: bold;
+}
+
+#btnCancelarEqui{
+  display: block;
+}
+
+#btnGuardarEqui{
+  display: block;
+  margin-bottom: 30px;
+  margin-right: 5px;
+}
