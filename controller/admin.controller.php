@@ -465,10 +465,34 @@
       }else{
         $titulo= "Detalle de la asignacion";
         require_once 'view/include/header.php';
-        $detalle= $_POST["detalle"];
+        $detalle= $_GET["detalle"];
         $result= $this->model->DetalleAsignacion($detalle);
         require_once 'view/modules/admin/detalleAsignacion.php';
         require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para actualizar los datos de una asignacion determinada en el sistema
+
+    public function UpdateAsignacion(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->UpdateAsignacion($data);
+        header("Location: ?c=admin&a=ReadAsignacion&msn=$result");
+      }
+    }
+
+    //Funcion para eliminar una asignacion determinada en el sistema
+
+    public function DeleteAsignacion(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $id= $_GET["id"];
+        $result= $this->model->DeleteAsignacion($id);
+        header("Location: ?c=admin&a=ReadAsignacion&msn=$result");
       }
     }
 

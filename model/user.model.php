@@ -179,7 +179,7 @@ class UserModel{
 
   public function UpdateEquipo($data){
     try {
-      $sql= "UPDATE equipo SET equi_type= '$data[1]', equi_consecutivo= '$data[2]', equi_hostname= '$data[3]' WHERE equi_serial= :equi_id";
+      $sql= "UPDATE equipo SET equi_type= '$data[1]', equi_consecutivo= '$data[2]', equi_hostname= '$data[3]', equi_atid= '$data[4]', equi_oid= '$data[5]', equi_cid= '$data[6]', equi_office= '$data[7]', equi_version_office= '$data[8]', equi_super= '$data[9]', equi_cargo= '$data[10]', equi_nice_screen= '$data[11]', equi_nice_super= '$data[12]', equi_spector= '$data[13]', equi_amadeus_cm= '$data[14]' WHERE equi_serial= :equi_id";
       $query= $this->pdo->prepare($sql);
       $query->bindValue(":equi_id",$data[0]);
       $query->execute();
@@ -522,9 +522,9 @@ class UserModel{
 
   public function SearchHardphone($data){
     try {
-      $sql= "SELECT * FROM hardphone WHERE hard_serial LIKE ? OR hard_type LIKE ? OR hard_consecutivo LIKE ? OR hard_estado LIKE ?";
+      $sql= "SELECT * FROM hardphone WHERE hard_serial LIKE ? OR hard_type LIKE ? OR hard_consecutivo LIKE ? OR hard_extension LIKE ? OR hard_estado LIKE ?";
       $query= $this->pdo->prepare($sql);
-      $query->execute(array("%$data%","%$data%","%$data%","%$data%"));
+      $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%"));
       $data= $query->fetchALL(PDO::FETCH_BOTH);
 
     } catch (PDOException $e) {
@@ -582,7 +582,7 @@ class UserModel{
 
   public function UpdateHardphone($data){
     try {
-      $sql= "UPDATE hardphone SET hard_type= '$data[1]', hard_consecutivo= '$data[2]' WHERE hard_serial= :hard_id";
+      $sql= "UPDATE hardphone SET hard_type= '$data[1]', hard_consecutivo= '$data[2]', hard_extension= '$data[3]' WHERE hard_serial= :hard_id";
       $query= $this->pdo->prepare($sql);
       $query->bindValue(":hard_id",$data[0]);
       $query->execute();
@@ -630,22 +630,22 @@ class UserModel{
 
   public function CreateAsignacion($data){
 
-    $sql= "SELECT * FROM equipo WHERE equi_id= '$data[18]' AND equi_estado= 'Asignado'";
+    $sql= "SELECT * FROM equipo WHERE equi_id= '$data[6]' AND equi_estado= 'Asignado'";
     $query= $this->pdo->prepare($sql);
     $query->execute();
     $equi_asignacion= $query->rowCount();
 
-    $sql= "SELECT * FROM pantalla WHERE pant_id= '$data[19]' AND pant_estado= 'Asignado'";
+    $sql= "SELECT * FROM pantalla WHERE pant_id= '$data[7]' AND pant_estado= 'Asignado'";
     $query= $this->pdo->prepare($sql);
     $query->execute();
     $pant_asignacion= $query->rowCount();
 
-    $sql= "SELECT * FROM teclado WHERE tec_id= '$data[20]' AND tec_estado= 'Asignado'";
+    $sql= "SELECT * FROM teclado WHERE tec_id= '$data[8]' AND tec_estado= 'Asignado'";
     $query= $this->pdo->prepare($sql);
     $query->execute();
     $tec_asignacion= $query->rowCount();
 
-    $sql= "SELECT * FROM hardphone WHERE hard_id= '$data[21]' AND hard_estado= 'Asignado'";
+    $sql= "SELECT * FROM hardphone WHERE hard_id= '$data[9]' AND hard_estado= 'Asignado'";
     $query= $this->pdo->prepare($sql);
     $query->execute();
     $hard_asignacion= $query->rowCount();
@@ -670,22 +670,22 @@ class UserModel{
         try {
           $sql= "INSERT INTO asignacion VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?)";
           $query= $this->pdo->prepare($sql);
-          $query->execute(array($data[7],$data[8],$data[9],$data[10],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[11],$data[12]));
+          $query->execute(array($data[6],$data[7],$data[8],$data[9],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[10],$data[11]));
           $msn= "La asignacion guardó exitosamente.";
 
-          $sql= "UPDATE equipo SET equi_estado= 'Asignado' WHERE equi_id= '$data[18]'";
+          $sql= "UPDATE equipo SET equi_estado= 'Asignado' WHERE equi_id= '$data[6]'";
           $query= $this->pdo->prepare($sql);
           $query->execute();
 
-          $sql= "UPDATE pantalla SET pant_estado= 'Asignado' WHERE pant_id= '$data[19]'";
+          $sql= "UPDATE pantalla SET pant_estado= 'Asignado' WHERE pant_id= '$data[7]'";
           $query= $this->pdo->prepare($sql);
           $query->execute();
 
-          $sql= "UPDATE teclado SET tec_estado= 'Asignado' WHERE tec_id= '$data[20]'";
+          $sql= "UPDATE teclado SET tec_estado= 'Asignado' WHERE tec_id= '$data[8]'";
           $query= $this->pdo->prepare($sql);
           $query->execute();
 
-          $sql= "UPDATE hardphone SET hard_estado= 'Asignado' WHERE hard_id= '$data[21]'";
+          $sql= "UPDATE hardphone SET hard_estado= 'Asignado' WHERE hard_id= '$data[9]'";
           $query= $this->pdo->prepare($sql);
           $query->execute();
 
@@ -700,7 +700,7 @@ class UserModel{
 
   public function SearchAsignacion($data){
     try {
-      $sql= "SELECT * FROM asignacion INNER JOIN equipo ON(asignacion.equi_id = equipo.equi_id) INNER JOIN pantalla ON(asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON(asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON(asignacion.hard_id = hardphone.hard_id) INNER JOIN usuario ON(asignacion.user_id = usuario.user_id) WHERE asig_piso LIKE ? OR asig_oficina LIKE ? OR asig_puesto LIKE ? OR equi_serial LIKE ? OR pant_serial LIKE ? OR tec_serial LIKE ? OR hard_serial LIKE ? OR user_name LIKE ? OR asig_fecha LIKE ?";
+      $sql= "SELECT * FROM asignacion INNER JOIN equipo ON(asignacion.equi_id = equipo.equi_id) INNER JOIN pantalla ON(asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON(asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON(asignacion.hard_id = hardphone.hard_id) INNER JOIN usuario ON(asignacion.user_id = usuario.user_id) WHERE asig_piso LIKE ? OR asig_oficina LIKE ? OR asig_puesto LIKE ? OR equi_consecutivo LIKE ? OR pant_consecutivo LIKE ? OR tec_consecutivo LIKE ? OR hard_consecutivo LIKE ? OR user_name LIKE ? OR asig_fecha LIKE ?";
       $query= $this->pdo->prepare($sql);
       $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%"));
       $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -730,8 +730,8 @@ class UserModel{
 
   public function DetalleAsignacion($detalle){
     try {
-      $sql= "SELECT * FROM asignacion WHERE asig_id= '$detalle'";
-      $qiery= $this->pdo->prepare($sql);
+      $sql= "SELECT * FROM asignacion INNER JOIN equipo ON(asignacion.equi_id = equipo.equi_id) INNER JOIN pantalla ON(asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON(asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON(asignacion.hard_id = hardphone.hard_id) WHERE asig_id= '$detalle'";
+      $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_OBJ);
 
@@ -739,6 +739,22 @@ class UserModel{
       die($e->getMessage());
     }
     return $result;
+  }
+
+  //Funcion para acturalizar los datos de una asignacion determinada en la base de datos
+
+  public function UpdateAsignacion($data){
+    try {
+      $sql= "UPDATE asignacion SET asig_piso= '$data[1]', asig_oficina= '$data[2]', asig_puesto= '$data[3]', asig_lob= '$data[4]', asig_split= '$data[5]', asig_tipo_servicio= '$data[6]', asig_obser= '$data[7]' WHERE asig_id= :asig_id";
+      $query= $this->pdo->prepare($sql);
+      $query->bindValue("asig_id",$data[0]);
+      $query->execute();
+      $msn= "La asignacion se ha actualizado correctamente";
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $msn;
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

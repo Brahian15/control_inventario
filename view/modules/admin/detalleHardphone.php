@@ -40,9 +40,14 @@
       <label>Type</label>
     </div>
 
-    <div class="input-field col s8 offset-s2">
+    <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->hard_consecutivo; ?>" required>
       <label>Consecutivo del inventario</label>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]" value="<?php echo $data->hard_extension; ?>" required>
+      <label>Extensión</label>
     </div>
 
     <button id="btn" type="submit" class="btn waves-effect waves-light col s4 offset-s2 green darken-1">Actualizar</button>

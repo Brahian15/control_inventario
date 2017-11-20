@@ -46,8 +46,65 @@
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" value="<?php echo $data->equi_hostname; ?>"required>
+      <input type="text" name="data[]" value="<?php echo $data->equi_hostname; ?>" required>
       <label>Hostname</label>
+    </div>
+
+    <p class="col s8 offset-s2 center">Amadeus ARD</p>
+
+    <div class="input-field col s3 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->equi_atid; ?>" required>
+      <label>ATID</label>
+    </div>
+
+    <div class="input-field col s2">
+      <input type="text" name="data[]" value="<?php echo $data->equi_oid; ?>" required>
+      <label>OID</label>
+    </div>
+
+    <div class="input-field col s3">
+      <input type="text" name="data[]" value="<?php echo $data->equi_cid; ?>" required>
+      <label>CID</label>
+    </div>
+
+    <div class="input-field col s4 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->equi_office; ?>" required>
+      <label>Office</label>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]" value="<?php echo $data->equi_version_office; ?>">
+      <label>Versión de office</label>
+    </div>
+
+    <div class="input-field col s4 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->equi_super; ?>" required>
+      <label>Supervisor</label>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]" value="<?php echo $data->equi_cargo; ?>">
+      <label>Cargo del supervisor</label>
+    </div>
+
+    <div class="input-field col s4 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->equi_nice_screen; ?>" required>
+      <label>Nice ScreenAgent</label>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]" value="<?php echo $data->equi_nice_super; ?>" required>
+      <label>Nice</label>
+    </div>
+
+    <div class="input-field col s4 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->equi_spector; ?>">
+      <label>Spector360</label>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]" value="<?php echo $data->equi_amadeus_cm; ?>" required>
+      <label>Amadeus CM</label>
     </div>
 
     <button id="btn" type="submit" class="btn waves-effect waves-light col s4 offset-s2 green darken-1">Actualizar</button>

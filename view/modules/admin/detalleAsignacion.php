@@ -4,13 +4,13 @@
     <ul id="dropdown1" class="dropdown-content">
       <li><a href="?c=admin&a=dashboard">CPU</a></li>
       <li class="divider"></li>
-      <li class="active"><a href="?c=admin&a=ReadPantalla">Pantalla</a></li>
+      <li><a href="?c=admin&a=ReadPantalla">Pantalla</a></li>
       <li class="divider"></li>
       <li><a href="?c=admin&a=ReadTeclado">Teclado</a></li>
       <li class="divider"></li>
       <li><a href="?c=admin&a=ReadHardphone">Hardphone</a></li>
       <li class="divider"></li>
-      <li><a href="?c=admin&a=ReadAsignacion">Asignacion</a></li>
+      <li class="active"><a href="?c=admin&a=ReadAsignacion">Asignacion</a></li>
     </ul>
     <div class="nav-wrapper green darken-1">
       <ul>
@@ -25,10 +25,15 @@
     </div>
   </nav>
 
-  <form action="" method="post">
+  <form action="?c=admin&a=UpdateAsignacion" method="post">
     <h3>Detalle de la asignación</h3>
 
     <?php foreach($result as $data){ ?>
+
+    <div class="input-field col s8 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->asig_id; ?>" required>
+      <label>ID</label>
+    </div>
 
     <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->asig_piso; ?>" required>
@@ -46,48 +51,31 @@
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" value="<?php echo $data->asig_extension; ?>" required>
-      <label>Extension</label>
-    </div>
-
-    <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->asig_lob; ?>" required>
       <label>LOB</label>
     </div>
 
-    <div class="input-field col s4">
+    <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->asig_split; ?>" required>
       <label>Split</label>
     </div>
 
-    <div class="input-field col s4 offset-s2">
+    <div class="input-field col s4">
       <input type="text" name="data[]" value="<?php echo $data->asig_tipo_servicio; ?>" required>
       <label>Tipo de servicio</label>
     </div>
 
-    <div class="input-field col s4">
-      <input type="text" name="data[]" value="<?php echo $data->asig_atid; ?>" required>
-      <label>Amadeur ARD: ATID</label>
+    <div class="input-field col s8 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->asig_obser; ?>">
+      <label>Comentarios</label>
     </div>
 
-    <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->asig_iod; ?>" required>
-      <label>Amadeus ARD: OID</label>
-    </div>
+    <button id="btn" type="submit" class="btn waves-effect waves-light col s4 offset-s2 green darken-1 ">Actualizar</button>
 
-    <div class="input-field col s4">
-      <input type="text" name="data[]" value="<?php echo $data->asig_cid; ?>" required>
-      <label>Amadeus ARD: CID</label>
-    </div>
+  <?php } ?>
 
-    <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->asig_office; ?>" required>
-      <label>Office</label>
-    </div>
-
-    <div class="input-field col s4">
-      <input type="text" name="data[]" value="">
-    </div>
   </form>
+
+  <a href="?c=admin&a=ReadAsignacion" class="btn waves-effect waves-light col s4 blue-grey darken-2">Cancelar</a>
 
 </div>

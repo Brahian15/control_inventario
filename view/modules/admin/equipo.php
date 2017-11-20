@@ -68,21 +68,21 @@
     <div class="input-field col s4 offset-s2">
       <select name="data[]">
         <option disabled selected>Office</option>
-        <option value="0">Si</option>
-        <option value="1">No</option>
+        <option value="Si">Si</option>
+        <option value="No">No</option>
       </select>
     </div>
 
     <div class="input-field col s4">
       <input type="text" name="data[]">
-      <label>Version de office</label>
+      <label>Versión de office</label>
     </div>
 
     <div class="input-field col s4 offset-s2">
       <select name="data[]">
         <option disabled selected>Supervisor</option>
-        <option value="0">Si</option>
-        <option value="1">No</option>
+        <option value="Si">Si</option>
+        <option value="No">No</option>
       </select>
     </div>
 

@@ -23,7 +23,7 @@
     public function LoadEquipo(){
       $data= $this->load->ReadEquipobyAsignacion();
       foreach($data as $row){
-        echo "<option value='".$row["equi_id"]."'>".$row["equi_serial"]."</option>";
+        echo "<option value='".$row["equi_id"]."'>".$row["equi_consecutivo"]."</option>";
       }
     }
 
@@ -32,7 +32,7 @@
     public function LoadPantalla(){
       $data= $this->load->ReadPantallabyAsignacion();
       foreach($data as $row){
-        echo "<option value='".$row["pant_id"]."'>".$row["pant_serial"]."</option>";
+        echo "<option value='".$row["pant_id"]."'>".$row["pant_consecutivo"]."</option>";
       }
     }
 
@@ -41,7 +41,7 @@
     public function LoadTeclado(){
       $data= $this->load->ReadTecladobyAsignacion();
       foreach($data as $row){
-        echo "<option value='".$row["tec_id"]."'>".$row["tec_serial"]."</option>";
+        echo "<option value='".$row["tec_id"]."'>".$row["tec_consecutivo"]."</option>";
       }
     }
 
@@ -50,7 +50,7 @@
     public function LoadHardphone(){
       $data= $this->load->ReadHardphonebyAsignacion();
       foreach($data as $row){
-        echo "<option value='".$row["hard_id"]."'>".$row["hard_serial"]."</option>";
+        echo "<option value='".$row["hard_id"]."'>".$row["hard_consecutivo"]."</option>";
       }
     }
   }

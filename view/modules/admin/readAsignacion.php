@@ -50,13 +50,14 @@
           <th>Piso</th>
           <th>Oficina</th>
           <th>Puesto</th>
-          <th>Serial de la CPU</th>
-          <th>Serial de la pantalla</th>
-          <th>Serial del teclado</th>
-          <th>Serial del hardphone</th>
+          <th>Consecutivo de la CPU</th>
+          <th>Consecutivo de la pantalla</th>
+          <th>Consecutivo del teclado</th>
+          <th>Consecutivo del hardphone</th>
           <th>Asignado por</th>
           <th>Fecha de asignación</th>
           <th>Acción</th>
+          <th></th>
         </tr>
       </thead>
 
@@ -65,13 +66,14 @@
           <td><?php echo $row['asig_piso']; ?></td>
           <td><?php echo $row['asig_oficina']; ?></td>
           <td><?php echo $row['asig_puesto']; ?></td>
-          <td><?php echo $row['equi_serial']; ?></td>
-          <td><?php echo $row['pant_serial']; ?></td>
-          <td><?php echo $row['tec_serial']; ?></td>
-          <td><?php echo $row['hard_serial']; ?></td>
+          <td><?php echo $row['equi_consecutivo']; ?></td>
+          <td><?php echo $row['pant_consecutivo']; ?></td>
+          <td><?php echo $row['tec_consecutivo']; ?></td>
+          <td><?php echo $row['hard_consecutivo']; ?></td>
           <td><?php echo $row['user_name'] ?></td>
           <td><?php echo $row['asig_fecha']; ?></td>
-          <td><a href="" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="rght" data-tooltip="Eliminar asignacion" onclick="return confirm('¿Desea eliminar la asignacion permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?detalle=<?php echo $row['asig_id']; ?>&c=admin&a=DetalleAsignacion" class="btn waves-effect waves-light blue-darken-2 tooltipped" data-position="right" data-tooltip="Detalle de la asignación"><i class="small material-icons">update</i></a></td>
+          <td><a href="?id=<?php echo $row['asig_id']; ?>&c=admin&a=DeleteAsignacion" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="rght" data-tooltip="Eliminar asignacion" onclick="return confirm('¿Desea eliminar la asignacion permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
     </table>
@@ -88,13 +90,14 @@
           <th>Piso</th>
           <th>Oficina</th>
           <th>Puesto</th>
-          <th>Serial de la CPU</th>
-          <th>Serial de la pantalla</th>
-          <th>Serial del teclado</th>
-          <th>Serial del hardphone</th>
+          <th>Consecutivo de la CPU</th>
+          <th>Consecutivo de la pantalla</th>
+          <th>Consecutivo del teclado</th>
+          <th>Consecutivo del hardphone</th>
           <th>Asignado por</th>
           <th>Fecha de asignación</th>
           <th>Acción</th>
+          <th></th>
         </tr>
       </thead>
 
@@ -105,13 +108,14 @@
           <td><?php echo $data->asig_piso; ?></td>
           <td><?php echo $data->asig_oficina; ?></td>
           <td><?php echo $data->asig_puesto; ?></td>
-          <td><?php echo $data->equi_serial; ?></td>
-          <td><?php echo $data->pant_serial; ?></td>
-          <td><?php echo $data->tec_serial; ?></td>
-          <td><?php echo $data->hard_serial; ?></td>
+          <td><?php echo $data->equi_consecutivo; ?></td>
+          <td><?php echo $data->pant_consecutivo; ?></td>
+          <td><?php echo $data->tec_consecutivo; ?></td>
+          <td><?php echo $data->hard_consecutivo; ?></td>
           <td><?php echo $data->user_name; ?></td>
           <td><?php echo $data->asig_fecha; ?></td>
-          <td><a href="" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar asignación" onclick="return confirm('¿Desea eliminar la asignación permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?detalle=<?php echo $data->asig_id; ?>&c=admin&a=DetalleAsignacion" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Detalle de la asignación"><i class="small material-icons">update</i></a></td>
+          <td><a href="?id=<?php echo $data->asig_id; ?>&c=admin&a=DeleteAsignacion" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar asignación" onclick="return confirm('¿Desea eliminar la asignación permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
 
