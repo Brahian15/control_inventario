@@ -53,5 +53,23 @@
         echo "<option value='".$row["hard_id"]."'>".$row["hard_consecutivo"]."</option>";
       }
     }
+
+    //Funcion para cargar los datos de las versiones registradas en el sistema
+
+    public function LoadVersionOffice(){
+      $data= $this->load->ReadVersionOfficebyEqui();
+      foreach($data as $row){
+        echo "<option value'".$row["ver_id"]."'>".$row["ver_nom"]."</option>";
+      }
+    }
+
+    //Funcion para cargar los datos de los cargos registrados en el sistema
+
+    public function LoadCargo(){
+      $data= $this->load->ReadCargobyEqui();
+      foreach($data as $row){
+        echo "<option value='".$row["carg_id"]."'>".$row["carg_nom"]."</option>";
+      }
+    }
   }
 ?>

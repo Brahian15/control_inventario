@@ -105,7 +105,7 @@ class UserModel{
       try {
         $sql= "INSERT INTO equipo VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         $query= $this->pdo->prepare($sql);
-        $query->execute(array($data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[8],$data[9],$data[10],$data[11],$data[12],$data[13],$data[14],"Sin asignacion"));
+        $query->execute(array($data[8],$data[10],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[9],$data[11],$data[12],$data[13],$data[14],"Sin asignacion"));
         $msn= "La CPU fue guardada exitosamente.";
 
       } catch (PDOException $e) {
@@ -755,6 +755,154 @@ class UserModel{
       die($e->getMessage());
     }
     return $msn;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //                                                                                                            //
+  //                                            ADMIN LISTAS                                                    //
+  //                                                                                                            //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //Funcion que trae los datos de las versiones de office registradas en la base de datos
+
+  public function ReadVersionOffice(){
+    try {
+      $sql= "SELECT * FROM equi_version_office";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion que trae los datos de las versiones de office al equipo
+
+  public function ReadVersionOfficebyEqui(){
+    try {
+      $sql= "SELECT * FROM equi_version_office";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_BOTH);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion para guardar nuevas versiones de office en la base de datos
+
+  public function CreateVersionOffice($data){
+    try {
+      $sql= "INSERT INTO equi_version_office VALUES('',?)";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array($data[0]));
+      $msn= "La version de office fue guardada correctamente.";
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $msn;
+  }
+
+  //Funcion para eliminar las versiones registradas en la base de datos
+
+  public function DeleteVersionOffice($id){
+    $sql= "SELECT * FROM equipo WHERE ver_id= '$id'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $id_version= $query->rowCount();
+
+    if($id_version== true){
+      $msn= "No se puede eliminar la version ya que cuenta con equipos que poseen la version.";
+
+      return $msn;
+    }else{
+      try {
+        $sql= "DELETE FROM equi_version_office WHERE ver_id= '$id'";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $msn= "La version se eliminó correctamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
+    }
+  }
+
+  //Funcion que trae los datos de los cargos que estan registrados en la base de datos
+
+  public function ReadCargo(){
+    try {
+      $sql= "SELECT * FROM equi_cargo_super";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion que trae los datos de los cargos que estan registrados en la base de datos
+
+  public function ReadCargobyEqui(){
+    try {
+      $sql= "SELECT * FROM equi_cargo_super";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_BOTH);
+      
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+  //Funcion para crear nuevos cargos en la base de datos
+
+  public function CreateCargo($data){
+    try {
+      $sql= "INSERT INTO equi_cargo_super VALUES('',?)";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array($data[0]));
+      $msn= "El cargo fue creado correctamente.";
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $msn;
+  }
+
+  //Funcion para eliminar los cargos registrados en la base de datos
+
+  public function DeleteCargo($id){
+    $sql= "SELECT * FROM equipo WHERE carg_id= '$id'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $id_cargo= $query->rowCount();
+
+    if($id_cargo== true){
+      $msn= "No se puede eliminar el cargo ya que cuenta con equipos que poseen el cargo.";
+
+      return $msn;
+    }else{
+      try {
+        $sql= "DELETE FROM equi_cargo_super WHERE carg_id= '$id'";
+        $query= $this->pdo->prepare($sql);
+        $query->execute();
+        $msn= "El cargo se eliminó correctamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
+    }
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

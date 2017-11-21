@@ -498,6 +498,88 @@
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //                                                                                                            //
+    //                                            ADMIN LISTAS                                                    //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Funcion para ver las versiones de office registradas en el sistema
+
+    public function ListaOffice(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= "Lista de version de office";
+        require_once 'view/include/header.php';
+        $result= $this->model->ReadVersionOffice();
+        require_once 'view/modules/admin/listaOffice.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para registrar nuevas versiones de office en el sistema
+
+    public function CreateVersionOffice(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->CreateVersionOffice($data);
+        header("Location: ?c=admin&a=ListaOffice&msn=$result");
+      }
+    }
+
+    //Funcion para eliminar las versiones registradas en el sistema
+
+    public function DeleteVersionOffice(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $id= $_GET["id"];
+        $result= $this->model->DeleteVersionOffice($id);
+        header("Location: ?c=admin&a=ListaOffice&msn=$result");
+      }
+    }
+
+    //Funcion para ver los cargos registrados en el sistema
+
+    public function ListaCargo(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= "Lista de los cargos";
+        require_once 'view/include/header.php';
+        $result= $this->model->ReadCargo();
+        require_once 'view/modules/admin/listaCargo.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
+    //Funcion para registrar nuevos cargos en el sistema
+
+    public function CreateCargo(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $data= $_POST["data"];
+        $result= $this->model->CreateCargo($data);
+        header("Location: ?c=admin&a=ListaCargo&msn=$result");
+      }
+    }
+
+    //Funcion para eliminar los cargos registrados en el sistema
+
+    public function DeleteCargo(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $id= $_GET["id"];
+        $result= $this->model->DeleteCargo($id);
+        header("Location: ?c=admin&a=ListaCargo&msn=$result");
+      }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
     //                                            CERRAR SESION                                                   //
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
