@@ -857,7 +857,7 @@ class UserModel{
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_BOTH);
-      
+
     } catch (PDOException $e) {
       die($e->getMessage());
     }

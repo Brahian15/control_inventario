@@ -13,9 +13,9 @@
       <li><a href="?c=admin&a=ReadAsignacion">Asignacion</a></li>
     </ul>
     <ul id="dropdown2" class="dropdown-content">
-      <li><a href="#">Version de Office</a></li>
+      <li><a href="?c=admin&a=ListaOffice">Version de Office</a></li>
       <li class="divider"></li>
-      <li class="active"><a href="#">Cargo</a></li>
+      <li class="active"><a href="?c=admin&a=ListaCargo">Cargo</a></li>
     </ul>
     <div class="nav-wrapper green darken-1">
       <ul>
