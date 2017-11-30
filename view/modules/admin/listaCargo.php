@@ -46,12 +46,16 @@
 
   <?php foreach($result as $data){ ?>
 
-    <div class="input-field col s8 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->carg_nom; ?>">
-      <label>Cargo</label>
-    </div>
+    <?php if($data->carg_id != "1"){ ?>
 
-    <a id="btn" href="?id=<?php echo $data->carg_id; ?>&c=admin&a=DeleteCargo" class="btn waves-effect waves-light col s8 offset-s2 blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar cargo" onclick="return confirm('¿Desea elimianr el cargo permanentemente?')"><i class="small material-icons">delete</i></a>
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]" value="<?php echo $data->carg_nom; ?>">
+        <label>Cargo</label>
+      </div>
+
+      <a id="btn" href="?id=<?php echo $data->carg_id; ?>&c=admin&a=DeleteCargo" class="btn waves-effect waves-light col s8 offset-s2 blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar cargo" onclick="return confirm('¿Desea elimianr el cargo permanentemente?')"><i class="small material-icons">delete</i></a>
+
+    <?php } ?>
 
   <?php } ?>
 

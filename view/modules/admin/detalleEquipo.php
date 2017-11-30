@@ -79,7 +79,7 @@
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" value="<?php echo $data->equi_version_office; ?>">
+      <input type="text" name="data[]" value="<?php echo $data->ver_nom; ?>">
       <label>Versión de office</label>
     </div>
 
@@ -89,7 +89,7 @@
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" value="<?php echo $data->equi_cargo; ?>">
+      <input type="text" name="data[]" value="<?php echo $data->carg_nom; ?>">
       <label>Cargo del supervisor</label>
     </div>
 

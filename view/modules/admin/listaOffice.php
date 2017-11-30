@@ -46,12 +46,16 @@
 
   <?php foreach($result as $data){ ?>
 
-    <div class="input-field col s8 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->ver_nom; ?>">
-      <label>Versión de office</label>
-    </div>
+    <?php if($data->ver_id <> "1"){ ?>
 
-    <a id="btn" href="?id=<?php echo $data->ver_id; ?>&c=admin&a=DeleteVersionOffice" class="btn waves-effect waves-light col s8 offset-s2 blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar versión" onclick="return confirm('¿Desea eliminar esta version permanentemente?')"><i class="small material-icons">delete</i></a>
+      <div class="input-field col s8 offset-s2">
+        <input type="text" name="data[]" value="<?php echo $data->ver_nom; ?>">
+        <label>Versión de office</label>
+      </div>
+
+      <a id="btn" href="?id=<?php echo $data->ver_id; ?>&c=admin&a=DeleteVersionOffice" class="btn waves-effect waves-light col s8 offset-s2 blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar versión" onclick="return confirm('¿Desea eliminar esta version permanentemente?')"><i class="small material-icons">delete</i></a>
+
+    <?php } ?>
 
   <?php } ?>
 

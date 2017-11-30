@@ -108,7 +108,7 @@
 
     <div class="input-field col s4">
       <input type="text" name="data[]" class="validate" required>
-      <label>Nice</label>
+      <label>Nice supervisor</label>
     </div>
 
     <div class="input-field col s4 offset-s2">

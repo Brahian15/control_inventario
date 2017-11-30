@@ -164,7 +164,7 @@ class UserModel{
 
   public function DetalleEquipo($detalle){
     try {
-      $sql= "SELECT * FROM equipo WHERE equi_serial= '$detalle'";
+      $sql= "SELECT * FROM equipo INNER JOIN equi_version_office ON (equipo.ver_id = equi_version_office.ver_id) INNER JOIN equi_cargo_super ON (equipo.carg_id = equi_cargo_super.carg_id) WHERE equi_serial= '$detalle'";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -179,7 +179,7 @@ class UserModel{
 
   public function UpdateEquipo($data){
     try {
-      $sql= "UPDATE equipo SET equi_type= '$data[1]', equi_consecutivo= '$data[2]', equi_hostname= '$data[3]', equi_atid= '$data[4]', equi_oid= '$data[5]', equi_cid= '$data[6]', equi_office= '$data[7]', equi_version_office= '$data[8]', equi_super= '$data[9]', equi_cargo= '$data[10]', equi_nice_screen= '$data[11]', equi_nice_super= '$data[12]', equi_spector= '$data[13]', equi_amadeus_cm= '$data[14]' WHERE equi_serial= :equi_id";
+      $sql= "UPDATE equipo SET equi_type= '$data[1]', equi_consecutivo= '$data[2]', equi_hostname= '$data[3]', equi_atid= '$data[4]', equi_oid= '$data[5]', equi_cid= '$data[6]', equi_office= '$data[7]', equi_super= '$data[9]', equi_nice_screen= '$data[11]', equi_nice_super= '$data[12]', equi_spector= '$data[13]', equi_amadeus_cm= '$data[14]' WHERE equi_serial= :equi_id";
       $query= $this->pdo->prepare($sql);
       $query->bindValue(":equi_id",$data[0]);
       $query->execute();

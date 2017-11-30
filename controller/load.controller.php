@@ -59,7 +59,7 @@
     public function LoadVersionOffice(){
       $data= $this->load->ReadVersionOfficebyEqui();
       foreach($data as $row){
-        echo "<option value'".$row["ver_id"]."'>".$row["ver_nom"]."</option>";
+        echo "<option value='".$row["ver_id"]."'>".$row["ver_nom"]."</option>";
       }
     }
 
