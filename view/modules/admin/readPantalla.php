@@ -68,7 +68,7 @@
           <td><?php echo $row['pant_type']; ?></td>
           <td><?php echo $row['pant_consecutivo']; ?></td>
           <td><?php echo $row['pant_estado']; ?></td>
-          <td><a href="?detalle=<?php echo $row['pant_serial']; ?>&c=admin&a=DetallePantalla" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Detalle de la pantalla"><i class="small material-icons">update</i></a></td>
+          <td><a href="?detalle=<?php echo $row['pant_serial']; ?>&c=admin&a=DetallePantalla" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Modificar pantalla"><i class="small material-icons">update</i></a></td>
           <td><a href="?id=<?php echo $row['pant_id']; ?>&c=admin&a=DeletePantalla" class="btn waves-efect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar pantalla" onclick="return confirm('¿Desea eliminar la pantalla permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
@@ -100,7 +100,7 @@
           <td><?php echo $data->pant_type; ?></td>
           <td><?php echo $data->pant_consecutivo; ?></td>
           <td><?php echo $data->pant_estado; ?></td>
-          <td><a href="?detalle=<?php echo $data->pant_serial; ?>&c=admin&a=DetallePantalla" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Detalle de la pantalla"><i class="small material-icons">update</i></a></td>
+          <td><a href="?detalle=<?php echo $data->pant_serial; ?>&c=admin&a=DetallePantalla" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Modificar pantalla"><i class="small material-icons">update</i></a></td>
           <td><a href="?id=<?php echo $data->pant_id; ?>&c=admin&a=DeletePantalla" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar pantalla" onclick="return confirm('¿Desea eliminar la pantalla permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>

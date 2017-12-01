@@ -32,7 +32,7 @@
   </nav>
 
   <form action="?c=admin&a=UpdateEquipo" method="post">
-    <h3>Detalle de la CPU</h3>
+    <h3>Modificar CPU</h3>
 
     <?php foreach($result as $data){ ?>
 

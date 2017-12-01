@@ -32,7 +32,7 @@
   </nav>
 
   <form action="?c=admin&a=UpdateTeclado" method="post">
-    <h3>Detalle del teclado</h3>
+    <h3>Modificar teclado</h3>
 
     <?php foreach($result as $data){ ?>
 

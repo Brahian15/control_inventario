@@ -32,7 +32,7 @@
   </nav>
 
   <form action="?c=admin&a=UpdateAsignacion" method="post">
-    <h3>Detalle de la asignación</h3>
+    <h3>Modficar asignación</h3>
 
     <?php foreach($result as $data){ ?>
 

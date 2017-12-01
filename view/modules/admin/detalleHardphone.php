@@ -32,7 +32,7 @@
   </nav>
 
   <form action="?c=admin&a=UpdateHardphone" method="post">
-    <h3>Detalle del hardphone</h3>
+    <h3>Modificar hardphone</h3>
 
     <?php foreach($result as $data){ ?>
 

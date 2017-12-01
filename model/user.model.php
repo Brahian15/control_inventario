@@ -92,7 +92,7 @@ class UserModel{
   //Funcion de validacion y registro de CPU en la base de datos
 
   public function CreateEquipo($data){
-    $sql= "SELECT * FROM equipo WHERE equi_serial= '$data[0]' OR equi_type= '$data[1]' OR equi_consecutivo= '$data[2]' OR equi_hostname= '$data[3]'";
+    $sql= "SELECT * FROM equipo WHERE equi_serial= '$data[0]' OR equi_type= '$data[1]' OR equi_consecutivo= '$data[2]' OR equi_hostname= '$data[3]' OR equi_atid= '$data[4]' OR equi_oid= '$data[5]' OR equi_cid= '$data[6]' OR equi_nice_screen= '$data[11]' OR equi_nice_super= '$data[12]' OR equi_amadeus_cm= '$data[14]'";
     $query= $this->pdo->prepare($sql);
     $query->execute();
     $ver_equipo= $query->rowCount();
@@ -101,18 +101,26 @@ class UserModel{
       $msn= "Verifica los datos ingresados, ya que hay un dato que esta registrado en el sistema.";
 
       return $msn;
-    }else {
-      try {
-        $sql= "INSERT INTO equipo VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        $query= $this->pdo->prepare($sql);
-        $query->execute(array($data[8],$data[10],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[9],$data[11],$data[12],$data[13],$data[14],"Sin asignacion"));
-        $msn= "La CPU fue guardada exitosamente.";
+      }elseif($data[7]== "No" AND $data[8]!= "1"){
+        $msn= 'Si en el campo OFFICE elegiste la opción "No", en el campo VERSION DE OFFICE debes elegir "Sin versión"';
 
-      } catch (PDOException $e) {
-        die($e->getMessage());
-      }
-      return $msn;
-    }
+        return $msn;
+        }elseif($data[9]== "No" AND $data[10]!= "1"){
+          $msn= 'Si en el campo SUPERVISOR elegiste la opción "No", en el campo CARGO debes elegir "Sin cargo"';
+
+          return $msn;
+          }else{
+            try {
+              $sql= "INSERT INTO equipo VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+              $query= $this->pdo->prepare($sql);
+              $query->execute(array($data[8],$data[10],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[9],$data[11],$data[12],$data[13],$data[14],"Sin asignacion"));
+              $msn= "La CPU fue guardada exitosamente.";
+
+            } catch (PDOException $e) {
+              die($e->getMessage());
+            }
+            return $msn;
+          }
   }
 
   //Funcion para buscar una CPU determinada en la base de datos
@@ -149,7 +157,7 @@ class UserModel{
 
   public function ReadEquipobyAsignacion(){
     try {
-      $sql= "SELECT * FROM equipo ORDER BY equi_serial ASC";
+      $sql= "SELECT * FROM equipo WHERE equi_estado= 'Sin asignacion' ORDER BY equi_serial ASC";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_BOTH);
@@ -284,7 +292,7 @@ class UserModel{
 
   public function ReadPantallabyAsignacion(){
     try {
-      $sql= "SELECT * FROM pantalla ORDER BY pant_serial ASC";
+      $sql= "SELECT * FROM pantalla WHERE pant_estado= 'Sin asignacion' ORDER BY pant_serial ASC";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_BOTH);
@@ -418,7 +426,7 @@ class UserModel{
 
   public function ReadTecladobyAsignacion(){
     try {
-      $sql= "SELECT * FROM teclado ORDER BY tec_serial ASC";
+      $sql= "SELECT * FROM teclado WHERE tec_estado= 'Sin asignacion' ORDER BY tec_serial ASC";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_BOTH);
@@ -552,7 +560,7 @@ class UserModel{
 
   public function ReadHardphonebyAsignacion(){
     try {
-      $sql= "SELECT * FROM hardphone ORDER BY hard_serial ASC";
+      $sql= "SELECT * FROM hardphone WHERE hard_estado= 'Sin asignacion' ORDER BY hard_serial ASC";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_BOTH);

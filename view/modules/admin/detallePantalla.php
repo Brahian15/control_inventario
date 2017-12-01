@@ -32,7 +32,7 @@
   </nav>
 
   <form action="?c=admin&a=UpdatePantalla" method="post">
-    <h3>Detalle de la pantalla</h3>
+    <h3>Modificar pantalla</h3>
 
     <?php foreach($result as $data){ ?>
 
