@@ -1,7 +1,7 @@
 <?php
   require_once 'model/user.model.php';
   require_once 'load.controller.php';
-  require_once 'view/assets/random.php';
+  require_once 'view/assets/PHPExcel/Classes/PHPExcel.php';
 
   class AdminController{
 
