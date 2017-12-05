@@ -79,7 +79,7 @@
           <td><?php echo $row['user_name'] ?></td>
           <td><?php echo $row['asig_fecha']; ?></td>
           <td><a href="?detalle=<?php echo $row['asig_id']; ?>&c=admin&a=DetalleAsignacion" class="btn waves-effect waves-light blue-darken-2 tooltipped" data-position="left" data-tooltip="Modificar asignación"><i class="small material-icons">update</i></a></td>
-          <td><a href="?id=<?php echo $row['asig_id']; ?>&c=admin&a=DeleteAsignacion" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Eliminar asignacion" onclick="return confirm('¿Desea eliminar la asignacion permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?id=<?php echo $row['asig_id']; ?>&c=admin&a=ReadDeleteAsignacion" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Eliminar asignacion"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
     </table>
@@ -121,7 +121,7 @@
           <td><?php echo $data->user_name; ?></td>
           <td><?php echo $data->asig_fecha; ?></td>
           <td><a href="?detalle=<?php echo $data->asig_id; ?>&c=admin&a=DetalleAsignacion" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="left" data-tooltip="Modificar asignación"><i class="small material-icons">update</i></a></td>
-          <td><a href="?id=<?php echo $data->asig_id; ?>&c=admin&a=DeleteAsignacion" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Eliminar asignación" onclick="return confirm('¿Desea eliminar la asignación permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?id=<?php echo $data->asig_id; ?>&c=admin&a=ReadDeleteAsignacion" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Eliminar asignación"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
 

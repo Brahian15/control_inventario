@@ -765,6 +765,54 @@ class UserModel{
     return $msn;
   }
 
+  //Funcion para ver el detalle de un equipo determinado en la base de datos
+
+  public function ReadDeleteAsignacion($detalle){
+    try {
+      $sql= "SELECT * FROM asignacion INNER JOIN equipo ON(asignacion.equi_id = equipo.equi_id) INNER JOIN pantalla ON(asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON(asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON(asignacion.hard_id = hardphone.hard_id) WHERE asig_id= '$detalle'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
+  }
+
+
+  //Funcion para eliminar una asignacion determinada de la base de datos
+
+  public function DeleteAsignacion($data){
+    try {
+      $sql= "DELETE FROM asignacion WHERE asig_id= :asignacion";
+      $query= $this->pdo->prepare($sql);
+      $query->bindValue("asignacion",$data[0]);
+      $query->execute();
+      $msn= "La asignacion fue eliminada correctamente";
+
+      $sql= "UPDATE equipo SET equi_estado= 'Sin asignacion' WHERE equi_consecutivo= '$data[7]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+
+      $sql= "UPDATE pantalla SET pant_estado= 'Sin asignacion' WHERE pant_consecutivo= '$data[8]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+
+      $sql= "UPDATE teclado SET tec_estado= 'Sin asignacion' WHERE tec_consecutivo= '$data[9]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+
+      $sql= "UPDATE hardphone SET hard_estado= 'Sin asignacion' WHERE hard_consecutivo= '$data[10]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $msn;
+  }
+
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //                                                                                                            //
   //                                            ADMIN LISTAS                                                    //

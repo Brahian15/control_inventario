@@ -484,14 +484,29 @@
       }
     }
 
+
+
+    public function ReadDeleteAsignacion(){
+      if(!isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=login");
+      }else{
+        $titulo= "Eliminar asignacion";
+        require_once 'view/include/header.php';
+        $id= $_GET["id"];
+        $result= $this->model->ReadDeleteAsignacion($id);
+        require_once 'view/modules/admin/deleteAsignacion.php';
+        require_once 'view/include/footer.php';
+      }
+    }
+
     //Funcion para eliminar una asignacion determinada en el sistema
 
     public function DeleteAsignacion(){
       if(!isset($_SESSION["user"])){
         header("Location: ?c=admin&a=login");
       }else{
-        $id= $_GET["id"];
-        $result= $this->model->DeleteAsignacion($id);
+        $data= $_POST["data"];
+        $result= $this->model->DeleteAsignacion($data);
         header("Location: ?c=admin&a=ReadAsignacion&msn=$result");
       }
     }
