@@ -637,72 +637,33 @@ class UserModel{
   //Funcion de validacion y registro asignaciones en la base de datos
 
   public function CreateAsignacion($data){
+    try {
+      $sql= "INSERT INTO asignacion VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      $query= $this->pdo->prepare($sql);
+      $query->execute(array($data[6],$data[7],$data[8],$data[9],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[10],$data[11]));
+      $msn= "La asignacion guardó exitosamente.";
 
-    $sql= "SELECT * FROM equipo WHERE equi_id= '$data[6]' AND equi_estado= 'Asignado'";
-    $query= $this->pdo->prepare($sql);
-    $query->execute();
-    $equi_asignacion= $query->rowCount();
+      $sql= "UPDATE equipo SET equi_estado= 'Asignado' WHERE equi_id= '$data[6]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
 
-    $sql= "SELECT * FROM pantalla WHERE pant_id= '$data[7]' AND pant_estado= 'Asignado'";
-    $query= $this->pdo->prepare($sql);
-    $query->execute();
-    $pant_asignacion= $query->rowCount();
+      $sql= "UPDATE pantalla SET pant_estado= 'Asignado' WHERE pant_id= '$data[7]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
 
-    $sql= "SELECT * FROM teclado WHERE tec_id= '$data[8]' AND tec_estado= 'Asignado'";
-    $query= $this->pdo->prepare($sql);
-    $query->execute();
-    $tec_asignacion= $query->rowCount();
+      $sql= "UPDATE teclado SET tec_estado= 'Asignado' WHERE tec_id= '$data[8]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
 
-    $sql= "SELECT * FROM hardphone WHERE hard_id= '$data[9]' AND hard_estado= 'Asignado'";
-    $query= $this->pdo->prepare($sql);
-    $query->execute();
-    $hard_asignacion= $query->rowCount();
+      $sql= "UPDATE hardphone SET hard_estado= 'Asignado' WHERE hard_id= '$data[9]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
 
-    if($equi_asignacion== true){
-      $msn= "La CPU ya se encuentra asignada a un puesto.";
-
-      return $msn;
-    }elseif($pant_asignacion== true){
-      $msn= "La PANTALLA ya se encuentra asignada a un puesto.";
-
-      return $msn;
-    }elseif($tec_asignacion== true){
-      $msn= "El TECLADO ya se encuentra asignado a un puesto.";
-
-      return $msn;
-    }elseif($hard_asignacion== true){
-      $msn= "El HARDPHONE ya se encuentra asignado a un puesto.";
-
-      return $msn;
-      }else{
-        try {
-          $sql= "INSERT INTO asignacion VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?)";
-          $query= $this->pdo->prepare($sql);
-          $query->execute(array($data[6],$data[7],$data[8],$data[9],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[10],$data[11]));
-          $msn= "La asignacion guardó exitosamente.";
-
-          $sql= "UPDATE equipo SET equi_estado= 'Asignado' WHERE equi_id= '$data[6]'";
-          $query= $this->pdo->prepare($sql);
-          $query->execute();
-
-          $sql= "UPDATE pantalla SET pant_estado= 'Asignado' WHERE pant_id= '$data[7]'";
-          $query= $this->pdo->prepare($sql);
-          $query->execute();
-
-          $sql= "UPDATE teclado SET tec_estado= 'Asignado' WHERE tec_id= '$data[8]'";
-          $query= $this->pdo->prepare($sql);
-          $query->execute();
-
-          $sql= "UPDATE hardphone SET hard_estado= 'Asignado' WHERE hard_id= '$data[9]'";
-          $query= $this->pdo->prepare($sql);
-          $query->execute();
-
-        } catch (PDOException $e) {
-          die($e->getMessage());
-        }
-        return $msn;
-      }
+    } catch (PDOException $e) {
+      die($e->getMessage());
     }
+    return $msn;
+  }
 
   //Funcion para buscar asignaciones determinadas en la base de datos
 
@@ -959,6 +920,25 @@ class UserModel{
       }
       return $msn;
     }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //                                                                                                            //
+  //                                               PHPEXCEL                                                     //
+  //                                                                                                            //
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  public function ReporteExcel(){
+    try {
+      $sql= "SELECT * FROM asignacion INNER JOIN pantalla ON (asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON (asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON (asignacion.hard_id = hardphone.hard_id) INNER JOIN equipo ON (asignacion.equi_id = equipo.equi_id) INNER JOIN equi_version_office ON (equipo.ver_id = equi_version_office.ver_id) INNER JOIN equi_cargo_super ON (equipo.carg_id = equi_cargo_super.carg_id)";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+      $result= $query->fetchALL(PDO::FETCH_OBJ);
+      
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+    return $result;
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

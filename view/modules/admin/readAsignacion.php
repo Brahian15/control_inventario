@@ -131,5 +131,7 @@
 
   <?php } ?>
 
+  <a href="?c=admin&a=ReporteExcel" class="btn waves-effect waves-light col s8 offset-s2 green darken-1">DESCARGAR REPORTE EN EXCEL</a>
+
   </form>
 </div>
