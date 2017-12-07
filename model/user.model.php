@@ -928,13 +928,15 @@ class UserModel{
   //                                                                                                            //
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  //Funcion para llevar los datos al reporte de excel desde la base de datos
+
   public function ReporteExcel(){
     try {
       $sql= "SELECT * FROM asignacion INNER JOIN pantalla ON (asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON (asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON (asignacion.hard_id = hardphone.hard_id) INNER JOIN equipo ON (asignacion.equi_id = equipo.equi_id) INNER JOIN equi_version_office ON (equipo.ver_id = equi_version_office.ver_id) INNER JOIN equi_cargo_super ON (equipo.carg_id = equi_cargo_super.carg_id)";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_OBJ);
-      
+
     } catch (PDOException $e) {
       die($e->getMessage());
     }

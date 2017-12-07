@@ -53,7 +53,7 @@
         <label>Versión de office</label>
       </div>
 
-      <a id="btn" href="?id=<?php echo $data->ver_id; ?>&c=admin&a=DeleteVersionOffice" class="btn waves-effect waves-light col s8 offset-s2 blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar versión" onclick="return confirm('¿Desea eliminar esta version permanentemente?')"><i class="small material-icons">delete</i></a>
+      <a id="btn" href="?id=<?php echo $data->ver_id; ?>&c=admin&a=DeleteVersionOffice" class="btn waves-effect waves-light col s8 offset-s2 red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar versión" onclick="return confirm('¿Desea eliminar esta version permanentemente?')"><i class="small material-icons">delete</i></a>
 
     <?php } ?>
 

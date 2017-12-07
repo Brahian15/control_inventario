@@ -70,7 +70,7 @@
                 <td><?php echo $row['equi_hostname']; ?></td>
                 <td><?php echo $row['equi_estado']; ?></td>
                 <td><a href="?detalle=<?php echo $row['equi_serial']; ?>&c=admin&a=DetalleEquipo" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Modificar CPU"><i class="small material-icons">update</i></a></td>
-                <td><a href="?id=<?php echo $row['equi_id']; ?>&c=admin&a=DeleteEquipo" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar CPU" onclick="return confirm('¿Desea eliminar la CPU permanentemente?')"><i class="small material-icons">delete</i></a></td>
+                <td><a href="?id=<?php echo $row['equi_id']; ?>&c=admin&a=DeleteEquipo" class="btn waves-effect waves-light red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar CPU" onclick="return confirm('¿Desea eliminar la CPU permanentemente?')"><i class="small material-icons">delete</i></a></td>
               </tr>
             </tbody>
           </table>
@@ -105,7 +105,7 @@
           <td><?php echo $data->equi_hostname; ?></td>
           <td><?php echo $data->equi_estado; ?></td>
           <td><a href="?detalle=<?php echo $data->equi_serial; ?>&c=admin&a=DetalleEquipo" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Modificar CPU"><i class="small material-icons">update</i></a></td>
-          <td><a href="?id=<?php echo $data->equi_id; ?>&c=admin&a=DeleteEquipo" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar CPU" onclick="return confirm('¿Desea eliminar la CPU permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?id=<?php echo $data->equi_id; ?>&c=admin&a=DeleteEquipo" class="btn waves-effect waves-light red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar CPU" onclick="return confirm('¿Desea eliminar la CPU permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
 

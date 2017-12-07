@@ -599,6 +599,8 @@
     //                                                                                                            //
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //Funcion para generar el reporte de excel de todas las asignaciones
+
     public function ReporteExcel(){
 
       $result= $this->model->ReporteExcel();

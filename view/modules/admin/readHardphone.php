@@ -71,7 +71,7 @@
           <td><?php echo $row['hard_extension']; ?></td>
           <td><?php echo $row['hard_estado'] ?></td>
           <td><a href="?detalle=<?php echo $row['hard_serial']; ?>&c=admin&a=DetalleHardphone" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Modificar hardphone"><i class="small material-icons">update</i></a></td>
-          <td><a href="?id=<?php echo $row['hard_id']; ?>&c=admin&a=DeleteHardphone" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar hardphone" onclick="return confirm('¿Desea eliminar el hardphone permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?id=<?php echo $row['hard_id']; ?>&c=admin&a=DeleteHardphone" class="btn waves-effect waves-light red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar hardphone" onclick="return confirm('¿Desea eliminar el hardphone permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
     </table>
@@ -106,7 +106,7 @@
           <td><?php echo $data->hard_extension; ?></td>
           <td><?php echo $data->hard_estado; ?></td>
           <td><a href="?detalle=<?php echo $data->hard_serial; ?>&c=admin&a=DetalleHardphone" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Modificar hardphone"><i class="small material-icons">update</i></a></td>
-          <td><a href="?id=<?php echo $data->hard_id; ?>&c=admin&a=DeleteHardphone" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar hardphone" onclick="return confirm('¿Desea eliminar el hardphone permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?id=<?php echo $data->hard_id; ?>&c=admin&a=DeleteHardphone" class="btn waves-effect waves-light red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar hardphone" onclick="return confirm('¿Desea eliminar el hardphone permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
 

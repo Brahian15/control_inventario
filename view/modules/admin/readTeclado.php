@@ -68,7 +68,7 @@
           <td><?php echo $row['tec_consecutivo']; ?></td>
           <td><?php echo $row['tec_estado']; ?></td>
           <td><a href="?detalle=<?php echo $row['tec_serial']; ?>&c=admin&a=DetalleTeclado" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Modificar teclado"><i class="small material-icons">update</i></a></td>
-          <td><a href="?id=<?php echo $row['tec_id']; ?>&c=admin&a=DeleteTeclado" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar teclado" onclick="return confirm('¿Desea eliminar el teclado permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?id=<?php echo $row['tec_id']; ?>&c=admin&a=DeleteTeclado" class="btn waves-effect waves-light red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar teclado" onclick="return confirm('¿Desea eliminar el teclado permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
     </table>
@@ -101,7 +101,7 @@
           <td><?php echo $data->tec_consecutivo; ?></td>
           <td><?php echo $data->tec_estado; ?></td>
           <td><a href="?detalle=<?php echo $data->tec_serial; ?>&c=admin&a=DetalleTeclado" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="top" data-tooltip="Modificar teclado"><i class="small material-icons">update</i></a></td>
-          <td><a href="?id=<?php echo $data->tec_id; ?>&c=admin&a=DeleteTeclado" class="btn waves-effect waves-light blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar teclado" onclick="return confirm('¿Desea eliminar el teclado permanentemente?')"><i class="small material-icons">delete</i></a></td>
+          <td><a href="?id=<?php echo $data->tec_id; ?>&c=admin&a=DeleteTeclado" class="btn waves-effect waves-light red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar teclado" onclick="return confirm('¿Desea eliminar el teclado permanentemente?')"><i class="small material-icons">delete</i></a></td>
         </tr>
       </tbody>
 
