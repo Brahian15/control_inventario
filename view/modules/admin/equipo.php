@@ -88,7 +88,7 @@
 
     <div class="input-field col s4 offset-s2">
       <select name="data[]">
-        <option disabled selected>Supervisor</option>
+        <option disabled selected>Encargado</option>
         <option value="Si">Si</option>
         <option value="No">No</option>
       </select>

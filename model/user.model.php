@@ -530,7 +530,7 @@ class UserModel{
 
   public function SearchHardphone($data){
     try {
-      $sql= "SELECT * FROM hardphone WHERE hard_serial LIKE ? OR hard_type LIKE ? OR hard_consecutivo LIKE ? OR hard_extension LIKE ? OR hard_estado LIKE ?";
+      $sql= "SELECT * FROM hardphone WHERE hard_serial LIKE ? OR hard_type LIKE ? OR hard_consecutivo LIKE ? OR hard_extension LIKE ? OR hard_estado LIKE ? AND hard_id<> '1'";
       $query= $this->pdo->prepare($sql);
       $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%"));
       $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -545,7 +545,7 @@ class UserModel{
 
   public function ReadHardphone(){
     try {
-      $sql= "SELECT * FROM hardphone";
+      $sql= "SELECT * FROM hardphone WHERE hard_id<> '1'";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -655,7 +655,7 @@ class UserModel{
       $query= $this->pdo->prepare($sql);
       $query->execute();
 
-      $sql= "UPDATE hardphone SET hard_estado= 'Asignado' WHERE hard_id= '$data[9]'";
+      $sql= "UPDATE hardphone SET hard_estado= 'Asignado' WHERE hard_id= '$data[9]' AND hard_id<> '1'";
       $query= $this->pdo->prepare($sql);
       $query->execute();
 
@@ -834,7 +834,7 @@ class UserModel{
     $id_version= $query->rowCount();
 
     if($id_version== true){
-      $msn= "No se puede eliminar la version ya que cuenta con equipos que poseen la version.";
+      $msn= "No se puede eliminar la version ya que cuenta con equipos que la poseen.";
 
       return $msn;
     }else{
