@@ -187,7 +187,7 @@ class UserModel{
 
   public function UpdateEquipo($data){
     try {
-      $sql= "UPDATE equipo SET equi_type= '$data[1]', equi_consecutivo= '$data[2]', equi_hostname= '$data[3]', equi_atid= '$data[4]', equi_oid= '$data[5]', equi_cid= '$data[6]', equi_office= '$data[7]', equi_super= '$data[9]', equi_nice_screen= '$data[11]', equi_nice_super= '$data[12]', equi_spector= '$data[13]', equi_amadeus_cm= '$data[14]' WHERE equi_serial= :equi_id";
+      $sql= "UPDATE equipo SET equi_type= '$data[1]', equi_consecutivo= '$data[2]', equi_hostname= '$data[3]', equi_atid= '$data[4]', equi_oid= '$data[5]', equi_cid= '$data[6]', equi_nice_screen= '$data[7]', equi_nice_super= '$data[8]', equi_spector= '$data[9]', equi_amadeus_cm= '$data[10]' WHERE equi_serial= :equi_id";
       $query= $this->pdo->prepare($sql);
       $query->bindValue(":equi_id",$data[0]);
       $query->execute();
@@ -560,7 +560,7 @@ class UserModel{
 
   public function ReadHardphonebyAsignacion(){
     try {
-      $sql= "SELECT * FROM hardphone WHERE hard_estado= 'Sin asignacion' ORDER BY hard_serial ASC";
+      $sql= "SELECT * FROM hardphone WHERE hard_estado= 'Sin asignacion' ORDER BY hard_id ASC";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_BOTH);

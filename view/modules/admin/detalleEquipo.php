@@ -74,23 +74,23 @@
     </div>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->equi_office; ?>" required>
+      <input type="text" name="data[]" value="<?php echo $data->equi_office; ?>" required disabled>
       <label>Office</label>
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" value="<?php echo $data->ver_nom; ?>">
+      <input type="text" name="data[]" value="<?php echo $data->ver_nom; ?>" disabled>
       <label>Versión de office</label>
     </div>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->equi_super; ?>" required>
-      <label>Supervisor</label>
+      <input type="text" name="data[]" value="<?php echo $data->equi_super; ?>" required disabled>
+      <label>Encargado</label>
     </div>
 
     <div class="input-field col s4">
-      <input type="text" name="data[]" value="<?php echo $data->carg_nom; ?>">
-      <label>Cargo del supervisor</label>
+      <input type="text" name="data[]" value="<?php echo $data->carg_nom; ?>" disabled>
+      <label>Cargo</label>
     </div>
 
     <div class="input-field col s4 offset-s2">

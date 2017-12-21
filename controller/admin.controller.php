@@ -88,7 +88,7 @@
       if(!isset($_SESSION["user"])){
         header("Location: ?c=admin&a=login");
       }else{
-        $titulo= 'Equipo';
+        $titulo= 'CPU';
         require_once 'view/include/header.php';
         require_once 'view/modules/admin/equipo.php';
         require_once 'view/include/footer.php';
@@ -113,7 +113,7 @@
       if(!isset($_SESSION["user"])){
         header("Location: ?c=admin&a=login");
       }else{
-        $titulo= 'Ver equipos';
+        $titulo= 'Ver CPU';
         require_once 'view/include/header.php';
         $result= $this->model->ReadEquipo();
         require_once 'view/modules/admin/readEquipo.php';
