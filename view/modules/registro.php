@@ -3,28 +3,28 @@
     <form action="index.php?c=admin&a=CreateUser" method="post">
 
       <div class="card-panel green darken-1">
-        <h3 class="center-align">REGISTRO</h3>
+        <h3 id="titleReg" class="center-align">REGISTRO</h3>
       </div>
 
       <div class="input-field col s12">
-        <input type="email" name="data[]" autofocus>
+        <input type="email" name="data[]" autofocus required>
         <label>Correo electronico</label>
       </div>
 
       <div class="input-field col s12">
-        <input type="text" name="data[]">
+        <input type="text" name="data[]" required>
         <label>Nombre completo</label>
       </div>
 
       <div class="input-field col s12">
-        <select name="data[]">
-          <option disabled selected>Seleccione el rol</option>
+        <select name="data[]" required>
+          <option value="" disabled selected>Seleccione el rol</option>
           <?php $this->load->LoadRol(); ?>
         </select>
       </div>
 
       <div class="input-field col s12">
-        <input type="password" name="data[]">
+        <input type="password" name="data[]" required>
         <label>Contraseña</label>
       </div>
 

@@ -49,11 +49,13 @@
     <?php if($data->ver_id <> "1"){ ?>
 
       <div class="input-field col s8 offset-s2">
-        <input type="text" name="data[]" value="<?php echo $data->ver_nom; ?>">
+        <input id="inputLista" type="text" name="data[]" value="<?php echo $data->ver_nom; ?>">
         <label>Versión de office</label>
       </div>
 
-      <a id="btn" href="?id=<?php echo $data->ver_id; ?>&c=admin&a=DeleteVersionOffice" class="btn waves-effect waves-light col s8 offset-s2 red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar versión" onclick="return confirm('¿Desea eliminar esta version permanentemente?')"><i class="small material-icons">delete</i></a>
+      <?php if($_SESSION["user"]["rol"] != "2"){ ?>
+        <a href="?id=<?php echo $data->ver_id; ?>&c=admin&a=DeleteVersionOffice" class="btn waves-effect waves-light col s1 red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar versión" onclick="return confirm('¿Desea eliminar esta version permanentemente?')"><i class="small material-icons">delete</i></a>
+      <?php } ?>
 
     <?php } ?>
 

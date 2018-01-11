@@ -70,6 +70,7 @@
         $_SESSION["user"]["code"]= $UserData["user_id"];
         $_SESSION["user"]["name"]= $UserData["user_name"];
         $_SESSION["user"]["email"]= $UserData["user_email"];
+        $_SESSION["user"]["rol"]= $UserData["rol_id"];
       }else{
         $return = array(false,"El correo o la contraseña no son los correctos.");
       }
