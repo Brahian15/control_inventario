@@ -73,7 +73,7 @@
 
     <div class="input-field col s4 offset-s2">
       <select name="data[]">
-        <option disabled selected>Office</option>
+        <option value="" disabled selected>Office</option>
         <option value="Si">Si</option>
         <option value="No">No</option>
       </select>
@@ -81,14 +81,14 @@
 
     <div class="input-field col s4">
       <select name="data[]">
-        <option disabled selected>Versión de office</option>
+        <option value="" disabled selected>Versión de office</option>
         <?php $this->load->LoadVersionOffice(); ?>
       </select>
     </div>
 
     <div class="input-field col s4 offset-s2">
       <select name="data[]">
-        <option disabled selected>Supervisor</option>
+        <option value="" disabled selected>Encargado</option>
         <option value="Si">Si</option>
         <option value="No">No</option>
       </select>
@@ -96,7 +96,7 @@
 
     <div class="input-field col s4">
       <select name="data[]">
-        <option disabled selected>Cargo</option>
+        <option value="" disabled selected>Cargo</option>
         <?php $this->load->LoadCargo(); ?>
       </select>
     </div>

@@ -6,7 +6,7 @@ table{
   margin-bottom: 30px;
 }
 
-#titleLogin{
+#titleLogin, #titleReg{
   color: white;
 }
 
@@ -15,7 +15,7 @@ table{
   margin-top: 20px;
 }
 
-#btnLogin, #btnRegistro{
+#btnLogin, #btnRegistro, #btnReporte, #inputLista{
   margin-bottom: 30px;
 }
 
@@ -30,7 +30,7 @@ h3, h5{
   text-align: center;
 }
 
-#btnGuardar, #btn{
+#btnGuardar{
   margin-bottom: 30px;
   margin-right: 5px;
 }

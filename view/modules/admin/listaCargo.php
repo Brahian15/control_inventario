@@ -34,7 +34,7 @@
   <h3>Lista de los cargos</h3>
 
   <form action="?c=admin&a=CreateCargo" method="post">
-    <div class="input-field col s8 offset-s2">
+    <div class="input-field col s6 offset-s2">
       <input type="text" name="data[]" required autofocus>
       <label>Nuevo cargo</label>
     </div>
@@ -49,11 +49,13 @@
     <?php if($data->carg_id != "1"){ ?>
 
       <div class="input-field col s8 offset-s2">
-        <input type="text" name="data[]" value="<?php echo $data->carg_nom; ?>">
+        <input id="inputLista" type="text" name="data[]" value="<?php echo $data->carg_nom; ?>">
         <label>Cargo</label>
       </div>
 
-      <a id="btn" href="?id=<?php echo $data->carg_id; ?>&c=admin&a=DeleteCargo" class="btn waves-effect waves-light col s8 offset-s2 blue-grey darken-2 tooltipped" data-position="right" data-tooltip="Eliminar cargo" onclick="return confirm('¿Desea elimianr el cargo permanentemente?')"><i class="small material-icons">delete</i></a>
+      <?php if($_SESSION["user"]["rol"] != "2"){ ?>
+        <a href="?id=<?php echo $data->carg_id; ?>&c=admin&a=DeleteCargo" class="btn waves-effect waves-light col s1 red darken-1 tooltipped" data-position="right" data-tooltip="Eliminar cargo" onclick="return confirm('¿Desea elimianr el cargo permanentemente?')"><i class="small material-icons">delete</i></a>
+      <?php } ?>
 
     <?php } ?>
 

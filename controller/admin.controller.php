@@ -70,6 +70,7 @@
         $_SESSION["user"]["code"]= $UserData["user_id"];
         $_SESSION["user"]["name"]= $UserData["user_name"];
         $_SESSION["user"]["email"]= $UserData["user_email"];
+        $_SESSION["user"]["rol"]= $UserData["rol_id"];
       }else{
         $return = array(false,"El correo o la contraseña no son los correctos.");
       }
@@ -88,7 +89,7 @@
       if(!isset($_SESSION["user"])){
         header("Location: ?c=admin&a=login");
       }else{
-        $titulo= 'Equipo';
+        $titulo= 'CPU';
         require_once 'view/include/header.php';
         require_once 'view/modules/admin/equipo.php';
         require_once 'view/include/footer.php';
@@ -113,7 +114,7 @@
       if(!isset($_SESSION["user"])){
         header("Location: ?c=admin&a=login");
       }else{
-        $titulo= 'Ver equipos';
+        $titulo= 'Ver CPU';
         require_once 'view/include/header.php';
         $result= $this->model->ReadEquipo();
         require_once 'view/modules/admin/readEquipo.php';
@@ -591,6 +592,116 @@
         $result= $this->model->DeleteCargo($id);
         header("Location: ?c=admin&a=ListaCargo&msn=$result");
       }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                                                                            //
+    //                                              PHPEXCEL                                                      //
+    //                                                                                                            //
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Funcion para generar el reporte de excel de todas las asignaciones
+
+    public function ReporteExcel(){
+
+      $result= $this->model->ReporteExcel();
+
+      error_reporting(E_ALL);
+      ini_set('display_errors', TRUE);
+      ini_set('display_startup_errors', TRUE);
+      date_default_timezone_set('America/Bogota');
+
+      $objPHPExcel = new PHPExcel();
+
+      if (PHP_SAPI == 'cli')
+        die('This example should only be run from a Web Browser');
+
+      $objPHPExcel->getProperties()->setCreator("Control_inventario")
+                    ->setLastModifiedBy("Control_inventario")
+                    ->setTitle("Reporte de inventario")
+                    ->setSubject("Reporte de inventario")
+                    ->setDescription("Este es el reporte del inventario de IT")
+                    ->setKeywords("Reporte inventario IT")
+                    ->setCategory("Reporte excel");
+
+      $objPHPExcel->setActiveSheetIndex(0)
+                  ->setCellValue('A1', 'Piso')
+                  ->setCellValue('B1', 'Oficina')
+                  ->setCellValue('C1', 'Puesto')
+                  ->setCellValue('D1', 'Extensión')
+                  ->setCellValue('E1', 'Hostname')
+                  ->setCellValue('F1', 'LOB')
+                  ->setCellValue('G1', 'Split')
+                  ->setCellValue('H1', 'Tipo servicio')
+                  ->setCellValue('I1', 'ATID')
+                  ->setCellValue('J1', 'OID')
+                  ->setCellValue('K1', 'CID')
+                  ->setCellValue('L1', 'Office')
+                  ->setCellValue('M1', 'Version Office')
+                  ->setCellValue('N1', 'CMS Supervisor')
+                  ->setCellValue('O1', 'Supervisor')
+                  ->setCellValue('P1', 'NICE ScreenAgent')
+                  ->setCellValue('Q1', 'NICE')
+                  ->setCellValue('R1', 'Spector360')
+                  ->setCellValue('S1', 'Amadeus CM')
+                  ->setCellValue('T1', 'Consecutivo CPU')
+                  ->setCellValue('U1', 'Consecutivo Pantalla')
+                  ->setCellValue('V1', 'Consecutivo teclado')
+                  ->setCellValue('W1', 'Consecutivo hardphone')
+                  ->setCellValue('X1', 'Observaciones');
+
+      $i = 2;
+      foreach($result as $data){
+        $objPHPExcel->setActiveSheetIndex(0)
+                    ->SetCellValue("A$i", $data->asig_piso)
+                    ->SetCellValue("B$i", $data->asig_oficina)
+                    ->SetCellValue("C$i", $data->asig_puesto)
+                    ->SetCellValue("D$i", $data->hard_extension)
+                    ->SetCellValue("E$i", $data->equi_hostname)
+                    ->SetCellValue("F$i", $data->asig_lob)
+                    ->SetCellValue("G$i", $data->asig_split)
+                    ->SetCellValue("H$i", $data->asig_tipo_servicio)
+                    ->SetCellValue("I$i", $data->equi_atid)
+                    ->SetCellValue("J$i", $data->equi_oid)
+                    ->SetCellValue("K$i", $data->equi_cid)
+                    ->SetCellValue("L$i", $data->equi_office)
+                    ->SetCellValue("M$i", $data->ver_nom)
+                    ->SetCellValue("N$i", $data->equi_super)
+                    ->SetCellValue("O$i", $data->carg_nom)
+                    ->SetCellValue("P$i", $data->equi_nice_screen)
+                    ->SetCellValue("Q$i", $data->equi_nice_super)
+                    ->SetCellValue("R$i", $data->equi_spector)
+                    ->SetCellValue("S$i", $data->equi_amadeus_cm)
+                    ->SetCellValue("T$i", $data->equi_consecutivo)
+                    ->SetCellValue("U$i", $data->pant_consecutivo)
+                    ->SetCellValue("V$i", $data->tec_consecutivo)
+                    ->SetCellValue("W$i", $data->hard_consecutivo)
+                    ->SetCellValue("X$i", $data->asig_obser);
+
+      $i++;
+      }
+
+      $objPHPExcel->getActiveSheet()->setTitle('Reporte de inventario');
+
+      $objPHPExcel->setActiveSheetIndex(0);
+
+      // Redirect output to a client’s web browser (Excel2007)
+      header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+      header('Content-Disposition: attachment;filename="ReporteInventario.xlsx"');
+      header('Cache-Control: max-age=0');
+      // If you're serving to IE 9, then the following may be needed
+      header('Cache-Control: max-age=1');
+
+      // If you're serving to IE over SSL, then the following may be needed
+      header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+      header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+      header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+      header ('Pragma: public'); // HTTP/1.0
+
+      $objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel2007');
+      $objWriter->save('php://output');
+      exit;
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -68,28 +68,28 @@
 
     <div class="input-field col s4 offset-s2">
       <select name="data[]">
-        <option disabled selected>Elige el consecutivo de inventario de la CPU</option>
+        <option value="" disabled selected>Elige el consecutivo de inventario de la CPU</option>
         <?php $this->load->LoadEquipo(); ?>
       </select>
     </div>
 
     <div class="input-field col s4">
       <select name="data[]">
-        <option disabled selected>Elige el consecutivo de inventario de la pantalla</option>
+        <option value="" disabled selected>Elige el consecutivo de inventario de la pantalla</option>
         <?php $this->load->LoadPantalla(); ?>
       </select>
     </div>
 
     <div class="input-field col s4 offset-s2">
       <select name="data[]">
-        <option disabled selected>Elige el consecutivo de inventario del teclado</option>
+        <option value="" disabled selected>Elige el consecutivo de inventario del teclado</option>
         <?php $this->load->LoadTeclado(); ?>
       </select>
     </div>
 
     <div class="input-field col s4">
       <select name="data[]">
-        <option disabled selected>Elige el consecutivo de inventario del hardphone</option>
+        <option value="" disabled selected>Elige el consecutivo de inventario del hardphone</option>
         <?php $this->load->LoadHardphone(); ?>
       </select>
     </div>
@@ -100,7 +100,7 @@
 
     <div class="input-field col s8 offset-s2">
       <textarea id="textarea1" name="data[]" class="materialize-textarea validate"></textarea>
-      <label for="textarea1">Comentarios</label>
+      <label for="textarea1">Observaciones</label>
     </div>
 
     <button id="btnGuardar" type="submit" class="btn waves-effect waves-light col s4 offset-s2 green darken-1">Guardar</button>
