@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2017 a las 23:37:57
+-- Tiempo de generación: 24-01-2018 a las 21:15:34
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -41,6 +41,7 @@ CREATE TABLE `asignacion` (
   `asig_lob` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el lob que este asignado a un equipo, pantalla, teclado o hardphone determinado.',
   `asig_split` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el split que este asignado a un equipo, pantalla, teclado o hardphone determinado.',
   `asig_tipo_servicio` varchar(50) NOT NULL COMMENT 'Es este campo se va a almacenar el tipo de servicio que se va a dar en un puesto determinado.',
+  `asig_seg_pant` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el consecutivo de la segunda pantalla si es que la posee',
   `asig_fecha` date NOT NULL COMMENT 'Este campo almacena la fecha en la que se realizo la asignacion',
   `asig_obser` varchar(200) DEFAULT NULL COMMENT 'Este campo va a almacenar las observaciones que hayan sobre un equipo, pantalla, teclado o hardphone determinado.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -63,20 +64,12 @@ CREATE TABLE `equipo` (
   `equi_oid` varchar(50) NOT NULL COMMENT 'Este campo pertenece a amadeus ard y va a almacenar el oid que se le sea asignado.',
   `equi_cid` varchar(50) NOT NULL COMMENT 'Este campo pertenece a amadeus ard y va a almacenar el cid que se le sea asignado.',
   `equi_office` varchar(2) NOT NULL COMMENT 'En este campo se va a almacenar si el equipo va a tener office.',
-  `equi_super` varchar(2) NOT NULL COMMENT 'Este campo va a almacenar si el puesto tiene supervisor.',
   `equi_nice_screen` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el Nice ScreenAgent que este asignado a un equipo determinado.',
   `equi_nice_super` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el Nice de un supervisor determinado',
   `equi_spector` varchar(50) DEFAULT NULL COMMENT 'Este campo va a almacenar el Spector360 que este asignado a un equipo determinado',
   `equi_amadeus_cm` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el amadeus cm que este asignado a un equipo.',
   `equi_estado` varchar(50) NOT NULL COMMENT 'Este campo almacena el estado de un equipo determinado, ya sea asignado o sin asignacion.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `equipo`
---
-
-INSERT INTO `equipo` (`equi_id`, `ver_id`, `carg_id`, `equi_serial`, `equi_type`, `equi_consecutivo`, `equi_hostname`, `equi_atid`, `equi_oid`, `equi_cid`, `equi_office`, `equi_super`, `equi_nice_screen`, `equi_nice_super`, `equi_spector`, `equi_amadeus_cm`, `equi_estado`) VALUES
-(11, 6, 3, '6165', 's564', 'GC01308', 'asdff', 'dfv', 'gf', 'hg', 'Si', 'Si', 'dfghdfg', 'dfghg', 'dgh', 'wet', 'sdfgs');
 
 -- --------------------------------------------------------
 
@@ -94,8 +87,7 @@ CREATE TABLE `equi_cargo_super` (
 --
 
 INSERT INTO `equi_cargo_super` (`carg_id`, `carg_nom`) VALUES
-(2, 'Sin Cargo'),
-(3, 'Supervisor');
+(1, 'Sin cargo');
 
 -- --------------------------------------------------------
 
@@ -113,9 +105,7 @@ CREATE TABLE `equi_version_office` (
 --
 
 INSERT INTO `equi_version_office` (`ver_id`, `ver_nom`) VALUES
-(4, 'Sin Office'),
-(5, 'Windows 7'),
-(6, 'Windows 10');
+(1, 'Sin version');
 
 -- --------------------------------------------------------
 
@@ -137,7 +127,8 @@ CREATE TABLE `hardphone` (
 --
 
 INSERT INTO `hardphone` (`hard_id`, `hard_serial`, `hard_type`, `hard_consecutivo`, `hard_extension`, `hard_estado`) VALUES
-(1, 'fmsdklmkm', 'kmlk', 'GC01308', 'asdmskl', 'Sin asignacion');
+(1, '-', '-', 'Sin hardphone', '-', 'Sin asignacion'),
+(2, '-', '-', 'Softphone', '-', 'Sin asignacion');
 
 -- --------------------------------------------------------
 
@@ -152,13 +143,6 @@ CREATE TABLE `pantalla` (
   `pant_consecutivo` varchar(50) NOT NULL COMMENT 'En este campo se va a almacenar el consecutivo de inventario de cada pantalla que se esta registrando.',
   `pant_estado` varchar(50) NOT NULL COMMENT 'Este campo almacena el estado de una pantalla determinada, ya sea asignado o sin asignacion.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `pantalla`
---
-
-INSERT INTO `pantalla` (`pant_id`, `pant_serial`, `pant_type`, `pant_consecutivo`, `pant_estado`) VALUES
-(2, 'jodnj', 'knksjn', 'GC01308', 'Sin asignacion');
 
 -- --------------------------------------------------------
 
@@ -193,13 +177,6 @@ CREATE TABLE `teclado` (
   `tec_estado` varchar(50) NOT NULL COMMENT 'Este campo va a almacenar el estado de un teclado determinado, ya sea asignado o sin asignacion.'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `teclado`
---
-
-INSERT INTO `teclado` (`tec_id`, `tec_serial`, `tec_type`, `tec_consecutivo`, `tec_estado`) VALUES
-(1, '23112', '112', 'GC01308', 'Sin asignacion');
-
 -- --------------------------------------------------------
 
 --
@@ -219,7 +196,7 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`user_id`, `rol_id`, `user_name`, `user_email`, `user_pass`) VALUES
-('USU-20171129-081120', 1, 'Brahian Grajales', 'brahian.verde@hotmail.com', 'brahian3372947');
+('USU-20180124-090148', 1, 'Brahian Esneider Grajales Herrera', 'brahian.grajales@onelinkbpo.com', 'brahian3372947');
 
 --
 -- Índices para tablas volcadas
@@ -241,8 +218,8 @@ ALTER TABLE `asignacion`
 --
 ALTER TABLE `equipo`
   ADD PRIMARY KEY (`equi_id`),
-  ADD KEY `equipo_ibfk_1` (`ver_id`),
-  ADD KEY `equipo_ibfk_2` (`carg_id`) USING BTREE;
+  ADD KEY `ver_id` (`ver_id`),
+  ADD KEY `carg_id` (`carg_id`);
 
 --
 -- Indices de la tabla `equi_cargo_super`
@@ -295,37 +272,37 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `asignacion`
 --
 ALTER TABLE `asignacion`
-  MODIFY `asig_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.';
+  MODIFY `asig_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `equi_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se va a almacenar la clave primaria de cada equipo. Tambien es la llave primaria de la tabla.', AUTO_INCREMENT=14;
+  MODIFY `equi_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se va a almacenar la clave primaria de cada equipo. Tambien es la llave primaria de la tabla.', AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `equi_cargo_super`
 --
 ALTER TABLE `equi_cargo_super`
-  MODIFY `carg_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Este campo almacena la clave primaria de cada cargo registrado en la base de datos', AUTO_INCREMENT=4;
+  MODIFY `carg_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Este campo almacena la clave primaria de cada cargo registrado en la base de datos', AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `equi_version_office`
 --
 ALTER TABLE `equi_version_office`
-  MODIFY `ver_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Este campo almacena la clave primaria de cada version de office registrada en la base de datos', AUTO_INCREMENT=7;
+  MODIFY `ver_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Este campo almacena la clave primaria de cada version de office registrada en la base de datos', AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `hardphone`
 --
 ALTER TABLE `hardphone`
-  MODIFY `hard_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=2;
+  MODIFY `hard_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `pantalla`
 --
 ALTER TABLE `pantalla`
-  MODIFY `pant_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=3;
+  MODIFY `pant_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `teclado`
 --
 ALTER TABLE `teclado`
-  MODIFY `tec_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=2;
+  MODIFY `tec_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'En este campo se almacena la clave primaria de cada registro. Este campo es la llave primaria de la tabla.', AUTO_INCREMENT=5;
 --
 -- Restricciones para tablas volcadas
 --
@@ -344,7 +321,7 @@ ALTER TABLE `asignacion`
 -- Filtros para la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  ADD CONSTRAINT `equipo_ibfk_1` FOREIGN KEY (`ver_id`) REFERENCES `equi_version_office` (`ver_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `equipo_ibfk_1` FOREIGN KEY (`ver_id`) REFERENCES `equi_version_office` (`ver_id`),
   ADD CONSTRAINT `equipo_ibfk_2` FOREIGN KEY (`carg_id`) REFERENCES `equi_cargo_super` (`carg_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
