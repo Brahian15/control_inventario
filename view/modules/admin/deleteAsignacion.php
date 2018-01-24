@@ -10,7 +10,7 @@
       <li class="divider"></li>
       <li><a href="?c=admin&a=ReadHardphone">Hardphone</a></li>
       <li class="divider"></li>
-      <li><a href="?c=admin&a=ReadAsignacion">Asignacion</a></li>
+      <li class="active"><a href="?c=admin&a=ReadAsignacion">Asignacion</a></li>
     </ul>
     <ul id="dropdown2" class="dropdown-content">
       <li><a href="?c=admin&a=ListaOffice">Version de Office</a></li>
@@ -19,12 +19,12 @@
     </ul>
     <div class="nav-wrapper green darken-1">
       <ul>
-        <li><a class="dropdown-button" data-activates="dropdown1" href="">Buscar<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li class="active"><a class="dropdown-button" data-activates="dropdown1" href="">Buscar<i class="material-icons right">arrow_drop_down</i></a></li>
         <li><a href="?c=admin&a=Equipo">CPU</a></li>
         <li><a href="?c=admin&a=Pantalla">Pantalla</a></li>
         <li><a href="?c=admin&a=Teclado">Teclado</a></li>
         <li><a href="?c=admin&a=Hardphone">Hardphone</a></li>
-        <li class="active"><a href="?c=admin&a=Asignacion">Asignacion</a></li>
+        <li><a href="?c=admin&a=Asignacion">Asignacion</a></li>
         <li><a class="dropdown-button" data-activates="dropdown2">Admin listas<i class="material-icons right">arrow_drop_down</i></a></li>
         <li><a href="?c=admin&a=logout" onclick="return confirm('¿Deseas cerrar sesion?')">Cerrar sesion</a></li>
       </ul>
@@ -33,7 +33,7 @@
 
   <form action="?c=admin&a=DeleteAsignacion" method="post">
 
-    <h3>Registro de asignación</h3>
+    <h3>Eliminar asignación</h3>
 
     <?php foreach($result as $data){ ?>
 
@@ -83,13 +83,22 @@
     </div>
 
     <div class="input-field col s4 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->asig_seg_pant; ?>">
+      <label>Consecutivo de la segunda pantalla</label>
+    </div>
+
+    <div class="input-field col s4">
       <input type="text" name="data[]" value="<?php echo $data->tec_consecutivo; ?>">
       <label>Consecutivo del teclado</label>
     </div>
 
-    <div class="input-field col s4">
+    <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->hard_consecutivo; ?>">
       <label>Consecutivo del hardphone</label>
+    </div>
+
+    <div class="input-field col s4">
+      <input type="text" name="data[]" value="<?php echo $data->asig_fecha; ?>" class="tooltipped" data-position="bottom" data-tooltip="Fecha de asignación">
     </div>
 
     <div class="input-field col s8 offset-s2">

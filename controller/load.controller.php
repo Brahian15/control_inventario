@@ -36,6 +36,15 @@
       }
     }
 
+    //Funcion para cargar los datos de las pantallas registradas en el sistema
+
+    public function LoadSegPantalla(){
+      $data= $this->load->ReadPantallabyAsignacion();
+      foreach($data as $row){
+        echo "<option value='".$row["pant_consecutivo"]."'>".$row["pant_consecutivo"]."</option>";
+      }
+    }
+
     //Funcion para cargar los datos de los taclados registrados en el sistema
 
     public function LoadTeclado(){

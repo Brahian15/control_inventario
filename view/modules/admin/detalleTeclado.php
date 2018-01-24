@@ -37,16 +37,21 @@
     <?php foreach($result as $data){ ?>
 
     <div class="input-field col s4 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->tec_id; ?>">
+      <label>ID</label>
+    </div>
+
+    <div class="input-field col s4">
       <input type="text" name="data[]" value="<?php echo $data->tec_serial; ?>" required>
       <label>Serial</label>
     </div>
 
-    <div class="input-field col s4">
+    <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->tec_type; ?>" required>
       <label>Type</label>
     </div>
 
-    <div class="input-field col s8 offset-s2">
+    <div class="input-field col s4">
       <input type="text" name="data[]" value="<?php echo $data->tec_consecutivo; ?>" required>
       <label>Consecutivo del inventario</label>
     </div>
