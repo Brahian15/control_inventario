@@ -36,6 +36,11 @@
 
     <?php foreach($result as $data){ ?>
 
+    <div class="input-field col s8 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->equi_id; ?>">
+      <label>ID</label>
+    </div>
+
     <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->equi_serial; ?>" required>
       <label>Serial</label>
@@ -83,12 +88,7 @@
       <label>Versión de office</label>
     </div>
 
-    <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->equi_super; ?>" required disabled>
-      <label>Encargado</label>
-    </div>
-
-    <div class="input-field col s4">
+    <div class="input-field col s8 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->carg_nom; ?>" disabled>
       <label>Cargo</label>
     </div>

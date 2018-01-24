@@ -30,7 +30,7 @@ h3, h5{
   text-align: center;
 }
 
-#btnGuardar{
+#btnGuardar, #btn{
   margin-bottom: 30px;
   margin-right: 5px;
 }

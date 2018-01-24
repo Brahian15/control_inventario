@@ -22,10 +22,14 @@
     //Funcion de carga del formulario de registro de usuarios
 
     public function register(){
-      $titulo = 'Registro';
-      require_once 'view/include/header.php';
-      require_once 'view/modules/registro.php';
-      require_once 'view/include/footer.php';
+      if(isset($_SESSION["user"])){
+        header("Location: ?c=admin&a=dashboard");
+      }else{
+        $titulo = 'Registro';
+        require_once 'view/include/header.php';
+        require_once 'view/modules/registro.php';
+        require_once 'view/include/footer.php';
+      }
     }
 
     //Funcion para crear usuarios en el sistema
@@ -485,7 +489,7 @@
       }
     }
 
-
+    //Funcion para ver los datos de la asignación que se va a eliminar
 
     public function ReadDeleteAsignacion(){
       if(!isset($_SESSION["user"])){
@@ -638,16 +642,16 @@
                   ->setCellValue('K1', 'CID')
                   ->setCellValue('L1', 'Office')
                   ->setCellValue('M1', 'Version Office')
-                  ->setCellValue('N1', 'CMS Supervisor')
-                  ->setCellValue('O1', 'Supervisor')
-                  ->setCellValue('P1', 'NICE ScreenAgent')
-                  ->setCellValue('Q1', 'NICE')
-                  ->setCellValue('R1', 'Spector360')
-                  ->setCellValue('S1', 'Amadeus CM')
-                  ->setCellValue('T1', 'Consecutivo CPU')
-                  ->setCellValue('U1', 'Consecutivo Pantalla')
-                  ->setCellValue('V1', 'Consecutivo teclado')
-                  ->setCellValue('W1', 'Consecutivo hardphone')
+                  ->setCellValue('N1', 'Supervisor')
+                  ->setCellValue('O1', 'NICE ScreenAgent')
+                  ->setCellValue('P1', 'NICE')
+                  ->setCellValue('Q1', 'Spector360')
+                  ->setCellValue('R1', 'Amadeus CM')
+                  ->setCellValue('S1', 'Consecutivo CPU')
+                  ->setCellValue('T1', 'Consecutivo Pantalla')
+                  ->setCellValue('U1', 'Consecutivo segunda Pantalla')
+                  ->setCellValue('V1', 'Consecutivo Teclado')
+                  ->setCellValue('W1', 'Consecutivo Hardphone')
                   ->setCellValue('X1', 'Observaciones');
 
       $i = 2;
@@ -666,14 +670,14 @@
                     ->SetCellValue("K$i", $data->equi_cid)
                     ->SetCellValue("L$i", $data->equi_office)
                     ->SetCellValue("M$i", $data->ver_nom)
-                    ->SetCellValue("N$i", $data->equi_super)
-                    ->SetCellValue("O$i", $data->carg_nom)
-                    ->SetCellValue("P$i", $data->equi_nice_screen)
-                    ->SetCellValue("Q$i", $data->equi_nice_super)
-                    ->SetCellValue("R$i", $data->equi_spector)
-                    ->SetCellValue("S$i", $data->equi_amadeus_cm)
-                    ->SetCellValue("T$i", $data->equi_consecutivo)
-                    ->SetCellValue("U$i", $data->pant_consecutivo)
+                    ->SetCellValue("N$i", $data->carg_nom)
+                    ->SetCellValue("O$i", $data->equi_nice_screen)
+                    ->SetCellValue("P$i", $data->equi_nice_super)
+                    ->SetCellValue("Q$i", $data->equi_spector)
+                    ->SetCellValue("R$i", $data->equi_amadeus_cm)
+                    ->SetCellValue("S$i", $data->equi_consecutivo)
+                    ->SetCellValue("T$i", $data->pant_consecutivo)
+                    ->SetCellValue("U$i", $data->asig_seg_pant)
                     ->SetCellValue("V$i", $data->tec_consecutivo)
                     ->SetCellValue("W$i", $data->hard_consecutivo)
                     ->SetCellValue("X$i", $data->asig_obser);
