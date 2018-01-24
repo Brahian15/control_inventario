@@ -86,15 +86,7 @@
       </select>
     </div>
 
-    <div class="input-field col s4 offset-s2">
-      <select name="data[]">
-        <option value="" disabled selected>Encargado</option>
-        <option value="Si">Si</option>
-        <option value="No">No</option>
-      </select>
-    </div>
-
-    <div class="input-field col s4">
+    <div class="input-field col s8 offset-s2">
       <select name="data[]">
         <option value="" disabled selected>Cargo</option>
         <?php $this->load->LoadCargo(); ?>

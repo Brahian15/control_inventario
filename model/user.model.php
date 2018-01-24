@@ -92,7 +92,7 @@ class UserModel{
   //Funcion de validacion y registro de CPU en la base de datos
 
   public function CreateEquipo($data){
-    $sql= "SELECT * FROM equipo WHERE equi_serial= '$data[0]' OR equi_type= '$data[1]' OR equi_consecutivo= '$data[2]' OR equi_hostname= '$data[3]' OR equi_atid= '$data[4]' OR equi_oid= '$data[5]' OR equi_cid= '$data[6]' OR equi_nice_screen= '$data[11]' OR equi_nice_super= '$data[12]' OR equi_amadeus_cm= '$data[14]'";
+    $sql= "SELECT * FROM equipo WHERE equi_serial= '$data[0]' OR equi_type= '$data[1]' OR equi_consecutivo= '$data[2]' OR equi_hostname= '$data[3]' OR equi_atid= '$data[4]' OR equi_oid= '$data[5]' OR equi_cid= '$data[6]' OR equi_nice_screen= '$data[10]' OR equi_nice_super= '$data[11]' OR equi_amadeus_cm= '$data[13]'";
     $query= $this->pdo->prepare($sql);
     $query->execute();
     $ver_equipo= $query->rowCount();
@@ -105,15 +105,11 @@ class UserModel{
         $msn= 'Si en el campo OFFICE elegiste la opción "No", en el campo VERSION DE OFFICE debes elegir "Sin versión"';
 
         return $msn;
-        }elseif($data[9]== "No" AND $data[10]!= "1"){
-          $msn= 'Si en el campo SUPERVISOR elegiste la opción "No", en el campo CARGO debes elegir "Sin cargo"';
-
-          return $msn;
-          }else{
+        }else{
             try {
-              $sql= "INSERT INTO equipo VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+              $sql= "INSERT INTO equipo VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
               $query= $this->pdo->prepare($sql);
-              $query->execute(array($data[8],$data[10],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[9],$data[11],$data[12],$data[13],$data[14],"Sin asignacion"));
+              $query->execute(array($data[8],$data[9],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[6],$data[7],$data[10],$data[11],$data[12],$data[13],"Sin asignacion"));
               $msn= "La CPU fue guardada exitosamente.";
 
             } catch (PDOException $e) {
@@ -186,18 +182,29 @@ class UserModel{
   //Funcion para actualizar los datos de una CPU determinado en la base de datos
 
   public function UpdateEquipo($data){
-    try {
-      $sql= "UPDATE equipo SET equi_type= '$data[1]', equi_consecutivo= '$data[2]', equi_hostname= '$data[3]', equi_atid= '$data[4]', equi_oid= '$data[5]', equi_cid= '$data[6]', equi_nice_screen= '$data[7]', equi_nice_super= '$data[8]', equi_spector= '$data[9]', equi_amadeus_cm= '$data[10]' WHERE equi_serial= :equi_id";
-      $query= $this->pdo->prepare($sql);
-      $query->bindValue(":equi_id",$data[0]);
-      $query->execute();
-      $msn= "La CPU se ha actualizado correctamente.";
+    $sql= "SELECT * FROM equipo WHERE equi_serial= '$data[1]' OR equi_type= '$data[2]' OR equi_consecutivo= '$data[3]' OR equi_hostname= '$data[4]' OR equi_atid= '$data[5]' OR equi_oid= '$data[6]' OR equi_cid= '$data[7]' OR equi_nice_screen= '$data[11]' OR equi_nice_super= '$data[12]' OR equi_amadeus_cm= '$data[14]'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $ver_equipo= $query->rowCount();
 
-    } catch (PDOException $e) {
-      die($e->getMessage());
+    if($ver_equipo== true){
+      $msn= "Verifica los datos ingresados, ya que hay un dato que esta registrado en el sistema.";
+
+      return $msn;
+      }else{
+        try {
+          $sql= "UPDATE equipo SET equi_serial= '$data[1]', equi_type= '$data[2]', equi_consecutivo= '$data[3]', equi_hostname= '$data[4]', equi_atid= '$data[5]', equi_oid= '$data[6]', equi_cid= '$data[7]', equi_nice_screen= '$data[8]', equi_nice_super= '$data[9]', equi_spector= '$data[10]', equi_amadeus_cm= '$data[11]' WHERE equi_id= :equi_id";
+          $query= $this->pdo->prepare($sql);
+          $query->bindValue(":equi_id",$data[0]);
+          $query->execute();
+          $msn= "La CPU se ha actualizado correctamente.";
+
+        } catch (PDOException $e) {
+          die($e->getMessage());
+        }
+        return $msn;
+      }
     }
-    return $msn;
-  }
 
   //Funcion para eliminar una CPU determinado en la base de datos
 
@@ -321,17 +328,28 @@ class UserModel{
   //Funcion para actuzalizar la pantalla en la base de datos
 
   public function UpdatePantalla($data){
-    try {
-      $sql= "UPDATE pantalla SET pant_type= '$data[1]', pant_consecutivo= '$data[2]' WHERE pant_serial= :pant_id";
-      $query= $this->pdo->prepare($sql);
-      $query->bindValue(":pant_id",$data[0]);
-      $query->execute();
-      $msn= "La pantalla se ha actualizado exitosamente.";
+    $sql= "SELECT * FROM pantalla WHERE pant_serial= '$data[0]' OR pant_type= '$data[1]' OR pant_consecutivo= '$data[2]'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $ver_pantalla= $query->rowCount();
 
-    } catch (PDOException $e) {
-      die($e->getMessage());
+    if($ver_pantalla== true){
+      $msn= "Verifica los datos ingresados, ya que hay un dato que esta registrado en el sistema.";
+
+      return $msn;
+    }else{
+      try {
+        $sql= "UPDATE pantalla SET pant_serial= '$data[1]', pant_type= '$data[2]', pant_consecutivo= '$data[3]' WHERE pant_id= :pant_id";
+        $query= $this->pdo->prepare($sql);
+        $query->bindValue(":pant_id",$data[0]);
+        $query->execute();
+        $msn= "La pantalla se ha actualizado exitosamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
     }
-    return $msn;
   }
 
   //Funcion para eliminar una pantalla determinada en la base de datos
@@ -455,17 +473,28 @@ class UserModel{
   //Function para actualizar los datos de un teclado determinado en la base de datos
 
   public function UpdateTeclado($data){
-    try {
-      $sql= "UPDATE teclado SET tec_type= '$data[1]', tec_consecutivo= '$data[2]' WHERE tec_serial= :tec_id";
-      $query= $this->pdo->prepare($sql);
-      $query->bindValue(":tec_id",$data[0]);
-      $query->execute();
-      $msn= "El teclado se ha actualizado correctamente.";
+    $sql= "SELECT * FROM teclado WHERE tec_serial= '$data[0]' OR tec_type= '$data[1]' OR tec_consecutivo= '$data[2]'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $ver_teclado= $query->rowCount();
 
-    } catch (PDOException $e) {
-      die($e->getMessage());
+    if($ver_teclado== true){
+      $msn= "Verifica los datos ingresados, ya que hay un dato que esta registrado en el sistema.";
+
+      return $msn;
+    }else{
+      try {
+        $sql= "UPDATE teclado SET tec_serial= '$data[1]' tec_type= '$data[2]', tec_consecutivo= '$data[3]' WHERE tec_id= :tec_id";
+        $query= $this->pdo->prepare($sql);
+        $query->bindValue(":tec_id",$data[0]);
+        $query->execute();
+        $msn= "El teclado se ha actualizado correctamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
     }
-    return $msn;
   }
 
   //Funcion para eliminar un teclado determinado en la base de datos
@@ -530,7 +559,7 @@ class UserModel{
 
   public function SearchHardphone($data){
     try {
-      $sql= "SELECT * FROM hardphone WHERE hard_serial LIKE ? OR hard_type LIKE ? OR hard_consecutivo LIKE ? OR hard_extension LIKE ? OR hard_estado LIKE ? AND hard_id<> '1'";
+      $sql= "SELECT * FROM hardphone WHERE hard_serial LIKE ? OR hard_type LIKE ? OR hard_consecutivo LIKE ? OR hard_extension LIKE ? OR hard_estado LIKE ? AND hard_id<> '1' AND hard_id<> '2'";
       $query= $this->pdo->prepare($sql);
       $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%"));
       $data= $query->fetchALL(PDO::FETCH_BOTH);
@@ -545,7 +574,7 @@ class UserModel{
 
   public function ReadHardphone(){
     try {
-      $sql= "SELECT * FROM hardphone WHERE hard_id<> '1'";
+      $sql= "SELECT * FROM hardphone WHERE hard_id<> '1' AND hard_id<> '2'";
       $query= $this->pdo->prepare($sql);
       $query->execute();
       $result= $query->fetchALL(PDO::FETCH_OBJ);
@@ -589,17 +618,28 @@ class UserModel{
   //Funcion para actualizar los datos de un hardphone determinado en la base de datos
 
   public function UpdateHardphone($data){
-    try {
-      $sql= "UPDATE hardphone SET hard_type= '$data[1]', hard_consecutivo= '$data[2]', hard_extension= '$data[3]' WHERE hard_serial= :hard_id";
-      $query= $this->pdo->prepare($sql);
-      $query->bindValue(":hard_id",$data[0]);
-      $query->execute();
-      $msn= "El hardphone se ha actualizado correctamente.";
+    $sql= "SELECT * FROM hardphone WHERE hard_serial= '$data[0]' OR hard_type= '$data[1]' OR hard_consecutivo= '$data[2]'";
+    $query= $this->pdo->prepare($sql);
+    $query->execute();
+    $ver_harphone= $query->rowCount();
 
-    } catch (PDOException $e) {
-      die($e->getMessage());
+    if($ver_harphone== true){
+      $msn= "Verifica los datos ingresados, ya que hay un dato que esta registrado en el sistema.";
+
+      return $msn;
+    }else{
+      try {
+        $sql= "UPDATE hardphone SET hard_serial= '$data[1]', hard_type= '$data[2]', hard_consecutivo= '$data[3]', hard_extension= '$data[4]' WHERE hard_id= :hard_id";
+        $query= $this->pdo->prepare($sql);
+        $query->bindValue(":hard_id",$data[0]);
+        $query->execute();
+        $msn= "El hardphone se ha actualizado correctamente.";
+
+      } catch (PDOException $e) {
+        die($e->getMessage());
+      }
+      return $msn;
     }
-    return $msn;
   }
 
   //Funcion para eliminar un hardphone determinado en la base de datos
@@ -638,9 +678,9 @@ class UserModel{
 
   public function CreateAsignacion($data){
     try {
-      $sql= "INSERT INTO asignacion VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      $sql= "INSERT INTO asignacion VALUES('',?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
       $query= $this->pdo->prepare($sql);
-      $query->execute(array($data[6],$data[7],$data[8],$data[9],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[10],$data[11]));
+      $query->execute(array($data[6],$data[7],$data[9],$data[10],$_SESSION["user"]["code"],$data[0],$data[1],$data[2],$data[3],$data[4],$data[5],$data[8],$data[11],$data[12]));
       $msn= "La asignacion guardó exitosamente.";
 
       $sql= "UPDATE equipo SET equi_estado= 'Asignado' WHERE equi_id= '$data[6]'";
@@ -651,11 +691,15 @@ class UserModel{
       $query= $this->pdo->prepare($sql);
       $query->execute();
 
-      $sql= "UPDATE teclado SET tec_estado= 'Asignado' WHERE tec_id= '$data[8]'";
+      $sql= "UPDATE pantalla SET pant_estado= 'Asignado' WHERE pant_consecutivo= '$data[8]'";
       $query= $this->pdo->prepare($sql);
       $query->execute();
 
-      $sql= "UPDATE hardphone SET hard_estado= 'Asignado' WHERE hard_id= '$data[9]' AND hard_id<> '1'";
+      $sql= "UPDATE teclado SET tec_estado= 'Asignado' WHERE tec_id= '$data[9]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+
+      $sql= "UPDATE hardphone SET hard_estado= 'Asignado' WHERE hard_id= '$data[10]' AND hard_id<> '1'";
       $query= $this->pdo->prepare($sql);
       $query->execute();
 
@@ -669,9 +713,9 @@ class UserModel{
 
   public function SearchAsignacion($data){
     try {
-      $sql= "SELECT * FROM asignacion INNER JOIN equipo ON(asignacion.equi_id = equipo.equi_id) INNER JOIN pantalla ON(asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON(asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON(asignacion.hard_id = hardphone.hard_id) INNER JOIN usuario ON(asignacion.user_id = usuario.user_id) WHERE asig_piso LIKE ? OR asig_oficina LIKE ? OR asig_puesto LIKE ? OR equi_consecutivo LIKE ? OR pant_consecutivo LIKE ? OR tec_consecutivo LIKE ? OR hard_consecutivo LIKE ? OR user_name LIKE ? OR asig_fecha LIKE ?";
+      $sql= "SELECT * FROM asignacion INNER JOIN equipo ON(asignacion.equi_id = equipo.equi_id) INNER JOIN pantalla ON(asignacion.pant_id = pantalla.pant_id) INNER JOIN teclado ON(asignacion.tec_id = teclado.tec_id) INNER JOIN hardphone ON(asignacion.hard_id = hardphone.hard_id) INNER JOIN usuario ON(asignacion.user_id = usuario.user_id) WHERE asig_piso LIKE ? OR asig_oficina LIKE ? OR asig_puesto LIKE ? OR equi_consecutivo LIKE ? OR pant_consecutivo LIKE ? OR asig_seg_pant LIKE ? OR tec_consecutivo LIKE ? OR hard_consecutivo LIKE ? OR user_name LIKE ? OR asig_fecha LIKE ?";
       $query= $this->pdo->prepare($sql);
-      $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%"));
+      $query->execute(array("%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%","%$data%"));
       $data= $query->fetchALL(PDO::FETCH_BOTH);
 
     } catch (PDOException $e) {
@@ -760,11 +804,15 @@ class UserModel{
       $query= $this->pdo->prepare($sql);
       $query->execute();
 
-      $sql= "UPDATE teclado SET tec_estado= 'Sin asignacion' WHERE tec_consecutivo= '$data[9]'";
+      $sql= "UPDATE pantalla SET pant_estado= 'Sin asignacion' WHERE pant_consecutivo= '$data[9]'";
       $query= $this->pdo->prepare($sql);
       $query->execute();
 
-      $sql= "UPDATE hardphone SET hard_estado= 'Sin asignacion' WHERE hard_consecutivo= '$data[10]'";
+      $sql= "UPDATE teclado SET tec_estado= 'Sin asignacion' WHERE tec_consecutivo= '$data[10]'";
+      $query= $this->pdo->prepare($sql);
+      $query->execute();
+
+      $sql= "UPDATE hardphone SET hard_estado= 'Sin asignacion' WHERE hard_consecutivo= '$data[11]'";
       $query= $this->pdo->prepare($sql);
       $query->execute();
 

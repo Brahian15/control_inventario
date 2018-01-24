@@ -2,23 +2,23 @@
   <form action="?c=admin&a=CreateAsignacion" method="post">
 
     <nav>
-      <ul id="dropdown1" class="dropdown-content">
-        <li><a href="?c=admin&a=dashboard">CPU</a></li>
-        <li class="divider"></li>
-        <li><a href="?c=admin&a=ReadPantalla">Pantalla</a></li>
-        <li class="divider"></li>
-        <li><a href="?c=admin&a=ReadTeclado">Teclado</a></li>
-        <li class="divider"></li>
-        <li><a href="?c=admin&a=ReadHardphone">Hardphone</a></li>
-        <li class="divider"></li>
-        <li><a href="?c=admin&a=ReadAsignacion">Asignacion</a></li>
-      </ul>
-      <ul id="dropdown2" class="dropdown-content">
-        <li><a href="?c=admin&a=ListaOffice">Version de Office</a></li>
-        <li class="divider"></li>
-        <li><a href="?c=admin&a=ListaCargo">Cargo</a></li>
-      </ul>
       <div class="nav-wrapper green darken-1">
+        <ul id="dropdown1" class="dropdown-content">
+          <li><a href="?c=admin&a=dashboard">CPU</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=ReadPantalla">Pantalla</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=ReadTeclado">Teclado</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=ReadHardphone">Hardphone</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=ReadAsignacion">Asignacion</a></li>
+        </ul>
+        <ul id="dropdown2" class="dropdown-content">
+          <li><a href="?c=admin&a=ListaOffice">Version de Office</a></li>
+          <li class="divider"></li>
+          <li><a href="?c=admin&a=ListaCargo">Cargo</a></li>
+        </ul>
         <ul>
           <li><a class="dropdown-button" data-activates="dropdown1" href="">Buscar<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a href="?c=admin&a=Equipo">CPU</a></li>
@@ -82,19 +82,27 @@
 
     <div class="input-field col s4 offset-s2">
       <select name="data[]">
+        <option value="" disabled selected>Elige el consecutivo de inventario de la segunda pantalla</option>
+        <option value="Sin segunda pantalla">Sin segunda pantalla</option>
+        <?php $this->load->LoadSegPantalla(); ?>
+      </select>
+    </div>
+
+    <div class="input-field col s4">
+      <select name="data[]">
         <option value="" disabled selected>Elige el consecutivo de inventario del teclado</option>
         <?php $this->load->LoadTeclado(); ?>
       </select>
     </div>
 
-    <div class="input-field col s4">
+    <div class="input-field col s4 offset-s2">
       <select name="data[]">
         <option value="" disabled selected>Elige el consecutivo de inventario del hardphone</option>
         <?php $this->load->LoadHardphone(); ?>
       </select>
     </div>
 
-    <div class="input-field col s8 offset-s2">
+    <div class="input-field col s4">
       <input type="date" name="data[]" value="<?php echo $fecha; ?>" class="validate tooltipped" required data-position="bottom" data-tooltip="Fecha de asignación">
     </div>
 

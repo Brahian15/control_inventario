@@ -72,7 +72,7 @@
     </div>
 
     <div class="input-field col s4 offset-s2">
-      <input type="text" name="data[]" value="<?php echo $data->equi_consecutivo; ?>" disabled>
+      <input type="text" name="data[]" value="<?php echo $data->equi_consecutivo; ?>"disabled>
       <label>Consecutivo de la CPU</label>
     </div>
 
@@ -82,20 +82,25 @@
     </div>
 
     <div class="input-field col s4 offset-s2">
+      <input type="text" name="data[]" value="<?php echo $data->asig_seg_pant; ?>" disabled>
+      <label>Consecutivo de la segunda pantalla</label>
+    </div>
+
+    <div class="input-field col s4">
       <input type="text" name="data[]" value="<?php echo $data->tec_consecutivo; ?>" disabled>
       <label>Consecutivo del teclado</label>
     </div>
 
-    <div class="input-field col s4">
+    <div class="input-field col s4 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->hard_consecutivo; ?>" disabled>
       <label>Consecutivo del hardphone</label>
     </div>
 
-    <div class="input-field col s4 offset-s2">
+    <div class="input-field col s4">
       <input type="text" name="data[]" value="<?php echo $data->asig_fecha; ?>" disabled>
     </div>
 
-    <div class="input-field col s4">
+    <div class="input-field col s8 offset-s2">
       <input type="text" name="data[]" value="<?php echo $data->asig_obser; ?>">
       <label>Comentarios</label>
     </div>
